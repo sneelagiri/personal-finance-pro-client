@@ -17,7 +17,7 @@ export default class Header extends Component<Props, State> {
   render() {
     return (
       <div className="header">
-        <Navbar bg="primary" variant="dark">
+        <Navbar bg="success" variant="dark">
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} roundedCircle className="brandImage" />
           </Navbar.Brand>

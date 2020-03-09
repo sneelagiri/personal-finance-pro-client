@@ -1,9 +1,13 @@
 * {
   text-align: center;
 }
-
-li {
-  text-align: left;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif;
 }
 
 .title {
@@ -17,6 +21,7 @@ li {
 button {
   margin-bottom: 30px;
   text-align: center;
+  font-family: "Merriweather", serif;
 }
 
 h2 {
@@ -25,4 +30,5 @@ h2 {
 
 p {
   margin-bottom: 0.5rem;
+  font-family: "Caladea", serif;
 }

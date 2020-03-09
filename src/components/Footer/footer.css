@@ -1,7 +1,7 @@
 .footer {
   text-align: center;
   color: white;
-  background-color: #0d7bff;
+  background-color: #61a946;
   margin-top: 20px;
   margin-bottom: 0;
 }
@@ -10,4 +10,5 @@
   margin-bottom: 0;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-family: "Caladea", serif;
 }

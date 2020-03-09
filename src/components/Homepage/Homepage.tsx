@@ -3,7 +3,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
 import "./homepage.css";
 import CanvasJSReact from "../../assets/canvasjs.react";
 
@@ -22,8 +21,10 @@ export default class Homepage extends Component<Props, State> {
       exportEnabled: true,
       animationEnabled: true,
       title: {
-        text: "Budget - March 2020: €2,235.00"
+        text: "Budget - March 2020: €2,235.00",
+        fontFamily: "Merriweather"
       },
+
       data: [
         {
           type: "pie",
@@ -33,6 +34,7 @@ export default class Homepage extends Component<Props, State> {
           indexLabel: "{label} - #percent%",
           percentFormatString: "#0.##",
           yValueFormatString: "€#,###.00",
+          indexLabelFontFamily: "Caladea",
           toolTipContent: "{y} (#percent%)",
           dataPoints: [
             { y: 670.5, label: "Savings Target" },
@@ -77,7 +79,7 @@ export default class Homepage extends Component<Props, State> {
         </Row>
         <Row>
           <Col>
-            <Button variant="primary" size="lg">
+            <Button variant="success" size="lg">
               Sign Up Now!
             </Button>
           </Col>
