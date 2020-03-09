@@ -26,12 +26,14 @@ export default class Header extends Component<Props, State> {
               Home
             </Nav.Link>
             <Nav.Link as={Link} to="/signup">
-              Features
+              Signup
             </Nav.Link>
             <Nav.Link as={Link} to="/login">
-              Pricing
+              Login
             </Nav.Link>
-            <Nav.Link as={Link} to="/your-finances"></Nav.Link>
+            <Nav.Link as={Link} to="/your-finances">
+              Your Finances
+            </Nav.Link>
           </Nav>
           {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

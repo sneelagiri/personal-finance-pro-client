@@ -1,6 +1,11 @@
 .header {
   padding-bottom: 20px;
-  margin-bottom: 160px;
+  margin-bottom: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+  text-emphasis: bold;
 }
 
 .brandImage {

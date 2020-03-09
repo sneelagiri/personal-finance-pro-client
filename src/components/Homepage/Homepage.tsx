@@ -3,8 +3,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 import "./homepage.css";
 import CanvasJSReact from "../../assets/canvasjs.react";
+
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -25,11 +27,12 @@ export default class Homepage extends Component<Props, State> {
       data: [
         {
           type: "pie",
-          showInLegend: "true",
+          // showInLegend: "true",
           legendText: "{label}",
           indexLabelFontSize: 16,
           indexLabel: "{label} - #percent%",
           percentFormatString: "#0.##",
+          yValueFormatString: "€#,###.00",
           toolTipContent: "{y} (#percent%)",
           dataPoints: [
             { y: 670.5, label: "Savings Target" },
@@ -46,31 +49,37 @@ export default class Homepage extends Component<Props, State> {
     };
     return (
       <Container fluid>
-        <Row>
+        <Row className="title">
           <Col>
             <h1>Manage your finances like a pro!</h1>
           </Col>
         </Row>
-        <Row>
-          <Col>
+        <Row className="body">
+          <Col className="featureList" sm>
             <h2>Features</h2>
-            <ul>
-              <li>Get informative visuals</li>
-              <li>Categorize expenses</li>
-              <li>Set savings targets</li>
-              <li>Access on all of your devices</li>
-              <li>Get bill alerts</li>
-              {/* <li>Import bank statement</li> */}
-              <li>Fast, simple, and responsive</li>
-            </ul>
+            <p>Get informative visuals</p>
+            <p>...</p>
+            <p>Categorize expenses</p>
+            <p>...</p>
+            <p>Set savings targets</p>
+            <p>...</p>
+            <p>Access on all of your devices</p>
+            <p>...</p>
+            <p>Get bill alerts</p>
+            <p>...</p>
+            <p>Import bank statement</p>
+            <p>...</p>
+            <p>Fast, simple, and responsive</p>
           </Col>
-          <Col>
+          <Col className="diagram" sm>
             <CanvasJSChart options={options} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button variant="success">Sign Up Now!</Button>
+            <Button variant="primary" size="lg">
+              Sign Up Now!
+            </Button>
           </Col>
         </Row>
       </Container>

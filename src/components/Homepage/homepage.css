@@ -5,3 +5,24 @@
 li {
   text-align: left;
 }
+
+.title {
+  margin-bottom: 40px;
+}
+
+.body {
+  margin-bottom: 50px;
+}
+
+button {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  padding-bottom: 20px;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
