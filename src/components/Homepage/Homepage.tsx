@@ -3,8 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-import sampleBudget from "../../assets/sample-budget.png";
+
 import "./homepage.css";
 interface Props {}
 interface State {}
@@ -14,7 +13,7 @@ export default class Homepage extends Component<Props, State> {
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Row>
           <Col>
             <h1>Manage your finances like a pro!</h1>
@@ -33,9 +32,7 @@ export default class Homepage extends Component<Props, State> {
               <li>Fast, simple, and responsive</li>
             </ul>
           </Col>
-          <Col>
-            <Image src={sampleBudget} fluid />
-          </Col>
+          <Col></Col>
         </Row>
         <Row>
           <Col>
