@@ -28,44 +28,45 @@ class Header extends Component<Props, State> {
           </Navbar.Brand>
           <Nav className="mr-auto">
             {authToken == null && (
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-            )}
-            {authToken == null && (
-              <Nav.Link as={Link} to="/signup">
-                Signup
-              </Nav.Link>
-            )}
-            {authToken == null && (
-              <Nav.Link as={Link} to="/login">
-                Login
-              </Nav.Link>
+              <span>
+                <Nav.Link as={Link} to="/">
+                  Home
+                </Nav.Link>
+
+                <Nav.Link as={Link} to="/signup">
+                  Signup
+                </Nav.Link>
+                <Nav.Link as={Link} to="/login">
+                  Login
+                </Nav.Link>
+              </span>
             )}
             {authToken && (
               <Nav.Link as={Link} to="/your-finances">
                 Your Finances
               </Nav.Link>
             )}
-          </Nav>
-          <Navbar.Toggle />
-          {authToken && (
-            <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>Signed in as: //todo</Navbar.Text>
-              <Button
-                onClick={() => {
-                  localStorage.removeItem(AUTH_TOKEN);
-                  this.props.history.push(`/`);
-                }}
-              >
-                Logout
-              </Button>
-            </Navbar.Collapse>
-          )}
-          {/* <Form inline>
+
+            <Navbar.Toggle />
+            {authToken && (
+              <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>Signed in as: //todo</Navbar.Text>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    localStorage.removeItem(AUTH_TOKEN);
+                    this.props.history.push(`/`);
+                  }}
+                >
+                  Logout
+                </Button>
+              </Navbar.Collapse>
+            )}
+            {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
           </Form> */}
+          </Nav>
         </Navbar>
       </div>
     );
