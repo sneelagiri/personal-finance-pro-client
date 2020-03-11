@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
+import { LOGIN_MUTATION } from "../../mutations/mutations";
 import gql from "graphql-tag";
 import { History, LocationState } from "history";
 import Form from "react-bootstrap/Form";
@@ -10,14 +11,6 @@ interface Props {
   history: History<LocationState>;
 }
 interface State {}
-
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
 
 export default class Login extends Component<Props, State> {
   state = {
