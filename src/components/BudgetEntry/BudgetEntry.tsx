@@ -19,6 +19,15 @@ export default class BudgetEntry extends Component<Props, State> {
     savingsTarget: 0
   };
 
+  addMonths = (date: string, months: number) => {
+    var d = date.getDate();
+    date.setMonth(date.getMonth() + +months);
+    if (date.getDate() != d) {
+      date.setDate(0);
+    }
+    return date;
+  };
+
   render() {
     const { startDate, endDate, total, savingsTarget } = this.state;
     return (
@@ -49,6 +58,7 @@ export default class BudgetEntry extends Component<Props, State> {
               type="date"
               name="endDate"
               value={endDate}
+              readOnly
             />
           </Form.Group>
 
