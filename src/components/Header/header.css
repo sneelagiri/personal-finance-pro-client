@@ -1,0 +1,14 @@
+.header {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  font-family: "Caladea", serif;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+  text-emphasis: bold;
+}
+
+.brandImage {
+  width: 50px;
+}
