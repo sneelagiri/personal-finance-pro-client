@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { AUTH_TOKEN } from "../../constants";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { History, LocationState } from "history";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { AUTH_TOKEN } from "../../constants";
 
 interface Props {
   history: History<LocationState>;

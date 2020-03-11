@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
@@ -6,10 +8,8 @@ import Nav from "react-bootstrap/Nav";
 // import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
-import "./header.css";
 import { AUTH_TOKEN } from "../../constants";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import "./header.css";
 
 interface Props extends RouteComponentProps<any> {}
 interface State {}
