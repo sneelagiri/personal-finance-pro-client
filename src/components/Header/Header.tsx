@@ -19,54 +19,59 @@ class Header extends Component<Props, State> {
 
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN);
-    console.log(authToken);
+    // console.log(authToken);
     return (
       <div className="header">
         <Navbar bg="success" variant="dark">
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} roundedCircle className="brandImage" />
           </Navbar.Brand>
-          <Nav className="mr-auto linkColor">
-            {authToken == null && (
-              <>
-                <Nav.Link as={Link} to="/" className="linkColor">
-                  Home
-                </Nav.Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto linkColor">
+              {authToken == null && (
+                <>
+                  <Nav.Link as={Link} to="/" className="linkColor">
+                    Home
+                  </Nav.Link>
 
-                <Nav.Link as={Link} to="/signup">
-                  Signup
+                  <Nav.Link as={Link} to="/signup">
+                    Signup
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/login">
+                    Login
+                  </Nav.Link>
+                </>
+              )}
+              {authToken && (
+                <Nav.Link as={Link} to="/your-finances">
+                  Your Finances
                 </Nav.Link>
-                <Nav.Link as={Link} to="/login">
-                  Login
-                </Nav.Link>
-              </>
-            )}
+              )}
+            </Nav>
             {authToken && (
-              <Nav.Link as={Link} to="/your-finances">
-                Your Finances
-              </Nav.Link>
-            )}
-
-            <Navbar.Toggle />
-            {authToken && (
-              <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>Signed in as: //todo</Navbar.Text>
+              <Nav>
+                <Navbar.Text className="headerText">
+                  Signed in as: //todo{" "}
+                </Navbar.Text>
                 <Button
                   size="sm"
                   onClick={() => {
                     localStorage.removeItem(AUTH_TOKEN);
                     this.props.history.push(`/`);
                   }}
+                  className="headerButton"
+                  variant="outline-light"
                 >
                   Logout
                 </Button>
-              </Navbar.Collapse>
+              </Nav>
             )}
             {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
           </Form> */}
-          </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );

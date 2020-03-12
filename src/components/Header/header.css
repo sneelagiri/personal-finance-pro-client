@@ -12,3 +12,11 @@
 .brandImage {
   width: 50px;
 }
+
+.headerButton {
+  margin-left: 20px;
+}
+
+.header .navbar-dark .navbar-text {
+  color: white;
+}
