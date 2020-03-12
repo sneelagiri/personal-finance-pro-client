@@ -27,14 +27,16 @@ export default class Login extends Component<Props, State> {
         <div>
           <Form
             className="form"
-            onSubmit={(e: any) => {
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault();
             }}
           >
             <Form.Group controlId="formEmail">
               <Form.Label>Email:</Form.Label>
               <Form.Control
-                onChange={(e: any) => this.setState({ email: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  this.setState({ email: e.target.value })
+                }
                 type="text"
                 name="email"
                 placeholder="Your email address"
@@ -44,7 +46,7 @@ export default class Login extends Component<Props, State> {
             <Form.Group controlId="formPassword">
               <Form.Label>Password:</Form.Label>
               <Form.Control
-                onChange={(e: any) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   this.setState({ password: e.target.value })
                 }
                 type="password"

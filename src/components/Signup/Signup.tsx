@@ -10,6 +10,7 @@ import { AUTH_TOKEN } from "../../constants";
 interface Props {
   history: History<LocationState>;
 }
+
 interface State {}
 
 export default class Signup extends Component<Props, State> {
@@ -27,14 +28,14 @@ export default class Signup extends Component<Props, State> {
         <h1>Signup</h1>
         <Form
           className="form"
-          onSubmit={(e: any) => {
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
           }}
         >
           <Form.Group controlId="formFirstName">
             <Form.Label>First Name:</Form.Label>
             <Form.Control
-              onChange={(e: any) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 this.setState({ firstName: e.target.value })
               }
               type="text"
@@ -46,7 +47,9 @@ export default class Signup extends Component<Props, State> {
           <Form.Group controlId="formLastName">
             <Form.Label>Last Name:</Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ lastName: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                this.setState({ lastName: e.target.value })
+              }
               type="text"
               name="lastName"
               placeholder="Your last name"
@@ -59,7 +62,9 @@ export default class Signup extends Component<Props, State> {
               <b>Email address:</b>
             </Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ email: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                this.setState({ email: e.target.value })
+              }
               type="email"
               name="email"
               value={email}
@@ -76,7 +81,9 @@ export default class Signup extends Component<Props, State> {
               <b>Password:</b>
             </Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ password: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                this.setState({ password: e.target.value })
+              }
               type="password"
               name="password"
               value={password}
@@ -87,10 +94,12 @@ export default class Signup extends Component<Props, State> {
           <Mutation
             mutation={SIGNUP_MUTATION}
             variables={{ email, password, firstName, lastName }}
-            onCompleted={(data: any) => this._confirm(data)}
+            onCompleted={(data: React.ChangeEvent<HTMLInputElement>) =>
+              this._confirm(data)
+            }
           >
             {(mutation: any) => (
-              <Button variant="primary" type="submit" onClick={mutation}>
+              <Button variant="success" type="submit" onClick={mutation}>
                 Signup
               </Button>
             )}
