@@ -1,35 +1,45 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { AUTH_TOKEN } from "../../constants";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { History, LocationState } from "history";
+import moment from "moment";
+import { AUTH_TOKEN } from "../../constants";
 
 interface Props {
   history: History<LocationState>;
 }
-interface State {}
+interface State {
+  startDate: string;
+  endDate: string;
+  stringTotal: string;
+  total: number;
+  stringSavingsTarget: string;
+  savingsTarget: number;
+}
 
 export default class BudgetEntry extends Component<Props, State> {
-  state = {
+  state: State = {
     startDate: "",
-    endDate: "",
-    total: 0,
-    savingsTarget: 0
-  };
-
-  addMonths = (date: string, months: number) => {
-    var d = date.getDate();
-    date.setMonth(date.getMonth() + +months);
-    if (date.getDate() != d) {
-      date.setDate(0);
-    }
-    return date;
+    endDate: moment(this.state.startDate)
+      .add(1, "month")
+      .format("YYYY-MM-DD"),
+    stringTotal: "",
+    total: parseFloat(this.state.stringTotal),
+    stringSavingsTarget: "",
+    savingsTarget: parseFloat(this.state.stringSavingsTarget)
   };
 
   render() {
-    const { startDate, endDate, total, savingsTarget } = this.state;
+    const {
+      startDate,
+      endDate,
+      stringTotal,
+      stringSavingsTarget,
+      total,
+      savingsTarget
+    } = this.state;
     return (
       <div>
         <h1>Start here!</h1>
@@ -54,7 +64,7 @@ export default class BudgetEntry extends Component<Props, State> {
           <Form.Group controlId="formEndDate">
             <Form.Label>End Date</Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ lastName: e.target.value })}
+              onChange={(e: any) => this.setState({ endDate: e.target.value })}
               type="date"
               name="endDate"
               value={endDate}
@@ -62,39 +72,47 @@ export default class BudgetEntry extends Component<Props, State> {
             />
           </Form.Group>
 
-          <Form.Group controlId="formEmail">
+          <Form.Group controlId="formBudget">
             <Form.Label>
-              <b>Email address:</b>
+              <b>This month's budget</b>
             </Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ email: e.target.value })}
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Your email"
+              as="input"
+              onChange={(e: any) =>
+                this.setState({ stringTotal: e.target.value })
+              }
+              type="number"
+              name="total"
+              value={stringTotal}
+              placeholder="e.g. 2450.00"
               required
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
-
-          <Form.Group controlId="formPassword">
+          <Form.Group controlId="formSavings">
             <Form.Label>
-              <b>Password:</b>
+              <b>This month's savings target</b>
             </Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ password: e.target.value })}
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Enter a safe password"
+              onChange={(e: any) =>
+                this.setState({
+                  stringSavingsTarget: e.target.value
+                })
+              }
+              type="number"
+              name="total"
+              value={stringSavingsTarget}
+              placeholder="e.g. 30%"
               required
             />
           </Form.Group>
           <Mutation
-            mutation={SIGNUP_MUTATION}
-            variables={{ email, password, firstName, lastName }}
+            mutation={BUDGET_ENTRY_MUTATION}
+            variables={{
+              startDate,
+              endDate,
+              total,
+              savingsTarget
+            }}
             onCompleted={(data: any) => this._confirm(data)}
           >
             {(mutation: any) => (
@@ -107,4 +125,14 @@ export default class BudgetEntry extends Component<Props, State> {
       </div>
     );
   }
+  _confirm = async (data: any) => {
+    const { token } = data.signup;
+    this._saveUserData(token);
+    console.log(token);
+    this.props.history.push(`/`);
+  };
+
+  _saveUserData = (token: string) => {
+    localStorage.setItem(AUTH_TOKEN, token);
+  };
 }
