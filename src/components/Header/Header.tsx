@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
@@ -6,10 +8,8 @@ import Nav from "react-bootstrap/Nav";
 // import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
-import "./header.css";
 import { AUTH_TOKEN } from "../../constants";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import "./header.css";
 
 interface Props extends RouteComponentProps<any> {}
 interface State {}
@@ -19,53 +19,59 @@ class Header extends Component<Props, State> {
 
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN);
-    console.log(authToken);
+    // console.log(authToken);
     return (
       <div className="header">
         <Navbar bg="success" variant="dark">
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} roundedCircle className="brandImage" />
           </Navbar.Brand>
-          <Nav className="mr-auto">
-            {authToken == null && (
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-            )}
-            {authToken == null && (
-              <Nav.Link as={Link} to="/signup">
-                Signup
-              </Nav.Link>
-            )}
-            {authToken == null && (
-              <Nav.Link as={Link} to="/login">
-                Login
-              </Nav.Link>
-            )}
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto linkColor">
+              {authToken == null && (
+                <>
+                  <Nav.Link as={Link} to="/" className="linkColor">
+                    Home
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/signup">
+                    Signup
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/login">
+                    Login
+                  </Nav.Link>
+                </>
+              )}
+              {authToken && (
+                <Nav.Link as={Link} to="/your-finances">
+                  Your Finances
+                </Nav.Link>
+              )}
+            </Nav>
             {authToken && (
-              <Nav.Link as={Link} to="/your-finances">
-                Your Finances
-              </Nav.Link>
+              <Nav>
+                <Navbar.Text className="headerText">
+                  Signed in as: //todo{" "}
+                </Navbar.Text>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    localStorage.removeItem(AUTH_TOKEN);
+                    this.props.history.push(`/`);
+                  }}
+                  className="headerButton"
+                  variant="outline-light"
+                >
+                  Logout
+                </Button>
+              </Nav>
             )}
-          </Nav>
-          <Navbar.Toggle />
-          {authToken && (
-            <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>Signed in as: //todo</Navbar.Text>
-              <Button
-                onClick={() => {
-                  localStorage.removeItem(AUTH_TOKEN);
-                  this.props.history.push(`/`);
-                }}
-              >
-                Logout
-              </Button>
-            </Navbar.Collapse>
-          )}
-          {/* <Form inline>
+            {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
           </Form> */}
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );

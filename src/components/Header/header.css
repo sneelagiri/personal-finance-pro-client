@@ -4,11 +4,19 @@
   font-family: "Caladea", serif;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.header .navbar-dark .navbar-nav .nav-link {
   color: white;
   text-emphasis: bold;
 }
 
 .brandImage {
   width: 50px;
+}
+
+.headerButton {
+  margin-left: 20px;
+}
+
+.header .navbar-dark .navbar-text {
+  color: white;
 }
