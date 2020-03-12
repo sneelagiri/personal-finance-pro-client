@@ -4,7 +4,7 @@
   font-family: "Caladea", serif;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.header .navbar-dark .navbar-nav .nav-link {
   color: white;
   text-emphasis: bold;
 }

@@ -26,10 +26,10 @@ class Header extends Component<Props, State> {
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} roundedCircle className="brandImage" />
           </Navbar.Brand>
-          <Nav className="mr-auto">
+          <Nav className="mr-auto linkColor">
             {authToken == null && (
-              <span>
-                <Nav.Link as={Link} to="/">
+              <>
+                <Nav.Link as={Link} to="/" className="linkColor">
                   Home
                 </Nav.Link>
 
@@ -39,7 +39,7 @@ class Header extends Component<Props, State> {
                 <Nav.Link as={Link} to="/login">
                   Login
                 </Nav.Link>
-              </span>
+              </>
             )}
             {authToken && (
               <Nav.Link as={Link} to="/your-finances">
