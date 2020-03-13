@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-import { LOGIN_MUTATION } from "../../mutations/mutations";
 import gql from "graphql-tag";
 import { History, LocationState } from "history";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { AUTH_TOKEN } from "../../constants";
+import { LOGIN_MUTATION } from "../../mutations/mutations";
+import { AUTH_TOKEN, LATEST_BUDGET, USER_DATA } from "../../constants";
 
 interface Props {
   history: History<LocationState>;
@@ -61,7 +61,7 @@ export default class Login extends Component<Props, State> {
               onCompleted={(data: any) => this._confirm(data)}
             >
               {(mutation: any) => (
-                <Button variant="primary" type="submit" onClick={mutation}>
+                <Button variant="success" type="submit" onClick={mutation}>
                   Login
                 </Button>
               )}
@@ -72,13 +72,22 @@ export default class Login extends Component<Props, State> {
     );
   }
   _confirm = async (data: any) => {
-    const { token } = data.login;
-    this._saveUserData(token);
-    console.log(token);
-    this.props.history.push(`/`);
+    console.log(data);
+    const { token, user, latestBudget } = data.login;
+    this._saveUserData(token, user, latestBudget);
+    // console.log(token);
+    if (latestBudget) {
+      this.props.history.push(`/overview`);
+    } else {
+      this.props.history.push(`/your-finances`);
+    }
   };
 
-  _saveUserData = (token: string) => {
+  _saveUserData = (token: string, user: object, latestBudget: object) => {
     localStorage.setItem(AUTH_TOKEN, token);
+    localStorage.setItem(USER_DATA, JSON.stringify(user));
+    if (typeof latestBudget === "object") {
+      localStorage.setItem(LATEST_BUDGET, JSON.stringify(latestBudget));
+    }
   };
 }
