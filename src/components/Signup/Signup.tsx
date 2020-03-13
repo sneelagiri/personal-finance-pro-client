@@ -33,7 +33,9 @@ export default class Signup extends Component<Props, State> {
           }}
         >
           <Form.Group controlId="formFirstName">
-            <Form.Label>First Name:</Form.Label>
+            <Form.Label>
+              <b>First Name:</b>
+            </Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 this.setState({ firstName: e.target.value })
@@ -42,10 +44,13 @@ export default class Signup extends Component<Props, State> {
               name="firstName"
               placeholder="Your first name"
               value={firstName}
+              required
             />
           </Form.Group>
           <Form.Group controlId="formLastName">
-            <Form.Label>Last Name:</Form.Label>
+            <Form.Label>
+              <b>Last Name:</b>
+            </Form.Label>
             <Form.Control
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 this.setState({ lastName: e.target.value })
@@ -54,6 +59,7 @@ export default class Signup extends Component<Props, State> {
               name="lastName"
               placeholder="Your last name"
               value={lastName}
+              required
             />
           </Form.Group>
 
