@@ -27,4 +27,22 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-export { SIGNUP_MUTATION, LOGIN_MUTATION };
+const BUDGET_ENTRY_MUTATION = gql`
+  mutation BudgetEntryMutation(
+    $total: Float!
+    $startDate: DateTime!
+    $endDate: DateTime!
+    $savingsTarget: Float!
+  ) {
+    postBudget(
+      total: $total
+      startDate: $startDate
+      endDate: $endDate
+      savingsTarget: $savingsTarget
+    ) {
+      total
+    }
+  }
+`;
+
+export { SIGNUP_MUTATION, LOGIN_MUTATION, BUDGET_ENTRY_MUTATION };
