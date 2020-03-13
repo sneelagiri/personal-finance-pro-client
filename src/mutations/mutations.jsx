@@ -23,10 +23,17 @@ const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
+      user {
+        firstName
+        lastName
+      }
+      latestBudget {
+        startDate
+        endDate
+      }
     }
   }
 `;
-
 
 const BUDGET_ENTRY_MUTATION = gql`
   mutation BudgetEntryMutation(
@@ -47,4 +54,3 @@ const BUDGET_ENTRY_MUTATION = gql`
 `;
 
 export { SIGNUP_MUTATION, LOGIN_MUTATION, BUDGET_ENTRY_MUTATION };
-
