@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Mutation } from "react-apollo";
+
 import gql from "graphql-tag";
 import { History, LocationState } from "history";
 import moment from "moment";
+import { BUDGET_ENTRY_MUTATION } from "../../mutations/mutations";
 import { AUTH_TOKEN } from "../../constants";
 
 interface Props {
@@ -22,13 +24,11 @@ interface State {
 export default class BudgetEntry extends Component<Props, State> {
   state: State = {
     startDate: "",
-    endDate: moment(this.state.startDate)
-      .add(1, "month")
-      .format("YYYY-MM-DD"),
+    endDate: "",
     stringTotal: "",
-    total: parseFloat(this.state.stringTotal),
+    total: 0.0,
     stringSavingsTarget: "",
-    savingsTarget: parseFloat(this.state.stringSavingsTarget)
+    savingsTarget: 0.0
   };
 
   render() {
@@ -53,7 +53,13 @@ export default class BudgetEntry extends Component<Props, State> {
             <Form.Label>Select Start Date</Form.Label>
             <Form.Control
               onChange={(e: any) =>
-                this.setState({ startDate: e.target.value })
+                this.setState({
+                  startDate: e.target.value,
+                  endDate: moment(e.target.value, "YYYY-MM-DD")
+                    .add(1, "months")
+                    .subtract(1, "days")
+                    .format("YYYY-MM-DD")
+                })
               }
               type="date"
               name="startDate"
@@ -64,7 +70,7 @@ export default class BudgetEntry extends Component<Props, State> {
           <Form.Group controlId="formEndDate">
             <Form.Label>End Date</Form.Label>
             <Form.Control
-              onChange={(e: any) => this.setState({ endDate: e.target.value })}
+              // onChange={(e: any) => this.setState({ endDate: e.target.value })}
               type="date"
               name="endDate"
               value={endDate}
@@ -79,7 +85,10 @@ export default class BudgetEntry extends Component<Props, State> {
             <Form.Control
               as="input"
               onChange={(e: any) =>
-                this.setState({ stringTotal: e.target.value })
+                this.setState({
+                  stringTotal: e.target.value,
+                  total: parseFloat(e.target.value)
+                })
               }
               type="number"
               name="total"
@@ -95,7 +104,8 @@ export default class BudgetEntry extends Component<Props, State> {
             <Form.Control
               onChange={(e: any) =>
                 this.setState({
-                  stringSavingsTarget: e.target.value
+                  stringSavingsTarget: e.target.value,
+                  savingsTarget: parseFloat(e.target.value)
                 })
               }
               type="number"
@@ -113,11 +123,14 @@ export default class BudgetEntry extends Component<Props, State> {
               total,
               savingsTarget
             }}
-            onCompleted={(data: any) => this._confirm(data)}
+            onError={(error: any) => {
+              console.log(error.networkError.result.errors);
+              console.log(error.graphQLErrors);
+            }}
           >
             {(mutation: any) => (
-              <Button variant="primary" type="submit" onClick={mutation}>
-                Signup
+              <Button variant="success" type="submit" onClick={mutation}>
+                Save
               </Button>
             )}
           </Mutation>
@@ -126,13 +139,7 @@ export default class BudgetEntry extends Component<Props, State> {
     );
   }
   _confirm = async (data: any) => {
-    const { token } = data.signup;
-    this._saveUserData(token);
-    console.log(token);
+    console.log(data);
     this.props.history.push(`/`);
-  };
-
-  _saveUserData = (token: string) => {
-    localStorage.setItem(AUTH_TOKEN, token);
   };
 }
