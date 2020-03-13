@@ -7,6 +7,10 @@ export default class Expenses extends Component<Props, State> {
   state = {};
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h1>Expenses</h1>
+      </div>
+    );
   }
 }

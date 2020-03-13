@@ -7,6 +7,10 @@ export default class RecurringBills extends Component<Props, State> {
   state = {};
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h1>Recurring Bills</h1>
+      </div>
+    );
   }
 }
