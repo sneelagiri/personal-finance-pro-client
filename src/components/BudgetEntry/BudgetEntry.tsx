@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import { History, LocationState } from "history";
 import moment from "moment";
 import { BUDGET_ENTRY_MUTATION } from "../../mutations/mutations";
-import { AUTH_TOKEN } from "../../constants";
+import { CURRENT_BUDGET } from "../../constants";
 
 interface Props {
   history: History<LocationState>;
@@ -127,6 +127,9 @@ export default class BudgetEntry extends Component<Props, State> {
               console.log(error.networkError.result.errors);
               console.log(error.graphQLErrors);
             }}
+            onCompleted={(data: any) => {
+              this._confirm(data);
+            }}
           >
             {(mutation: any) => (
               <Button variant="success" type="submit" onClick={mutation}>
@@ -139,7 +142,13 @@ export default class BudgetEntry extends Component<Props, State> {
     );
   }
   _confirm = async (data: any) => {
-    console.log(data);
-    this.props.history.push(`/`);
+    const { postBudget } = data;
+    console.log(postBudget);
+    this._saveUserData(postBudget);
+    this.props.history.push(`/overview`);
+  };
+
+  _saveUserData = (currentBudget: object) => {
+    localStorage.setItem(CURRENT_BUDGET, JSON.stringify(currentBudget));
   };
 }
