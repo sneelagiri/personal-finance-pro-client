@@ -27,6 +27,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
+
 const BUDGET_ENTRY_MUTATION = gql`
   mutation BudgetEntryMutation(
     $total: Float!
@@ -46,3 +47,4 @@ const BUDGET_ENTRY_MUTATION = gql`
 `;
 
 export { SIGNUP_MUTATION, LOGIN_MUTATION, BUDGET_ENTRY_MUTATION };
+
