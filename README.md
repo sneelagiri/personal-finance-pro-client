@@ -1,44 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 💰 Personal Finance Pro 💰
 
-## Available Scripts
+## What this project is about
+This repository is the front-end for a personal finances management application which aims to help users better manage their finances. 
 
-In the project directory, you can run:
+## Table of contents: 
+- **[Technologies used](#technologies-used)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[Requirements briefing](#requirements)**
+- **[Features built so far overview with pull requests](#features-built-so-far-overview-with-pull-requests)**
+- **[My agile workflow and trello board](#my-agile-workflow-and-trello-board)**
+- **[create-react-app-docs](#create-react-app)**
 
-### `yarn start`
+## Technologies used
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 👀👇 Click links to view some samples in this project 👇👀
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- **[Todo: Typescript](./src/)**  
+- **[Todo: Apollo GraphQL](./src/)**  
+- **[Todo: React](./src/)**  
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Goals for this project:
 
-### `yarn build`
+- To practice for myself
+- To track my monthly expenses
+- To track my monthly savings
+- To learn more about Apollo GraphQL and TypeScript
+- To share my app with anyone who is interested in managing their finances with a simple app
+- **[To showcase disciplined git usage](#my-git-workflow)**
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requirements
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+(Todo) Checkout out: **[requirements.md](./requirements.md)**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features built so far overview with pull requests
 
-### `yarn eject`
+#### 👀👇 Click links to view the pull requests 👇👀
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **[todo](https://github.com/sneelagiri/personal-finance-pro-client)**
+- **[todo](https://github.com/sneelagiri/personal-finance-pro-client)**
+- **[todo](https://github.com/sneelagiri/personal-finance-pro-client)**
+- **[todo](https://github.com/sneelagiri/personal-finance-pro-client)**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## My git workflow
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+In this project I try to use:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Good commit messages
+- Well named branches
+- Pull requests with summaries
 
-## Learn More
+If you have feedback to improve my git usage: **[please drop me a line!](https://www.linkedin.com/in/shashank-neelagiri/)** 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Here is my branching model for this project.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+master (auto deploys) ___________________
+                         \           /
+feature/some-feature      \_commits_/- pull request
+```
+
+## My agile workflow and Trello board
+
+I try to maintain a backlog eventhough I'm working on a project by myself. That way people can quickly jump in and start helping out. It also displays how I split up my tasks and try to build this project in an iterative and incremental way!
+
+**[Check out my trelloboard here](https://trello.com/b/uEV5f5AB/portfolio-project-personal-finance-management-app)**
+
+## Create React App
+
+(Todo) This project was scaffolded using the create-react-app cli. 
+
+**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
