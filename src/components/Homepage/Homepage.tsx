@@ -36,10 +36,10 @@ export default class Homepage extends Component<Props> {
               <p>...</p>
               <p>Access on all of your devices</p>
               <p>...</p>
-              <p>Get bill alerts</p>
+              {/* <p>Get bill alerts</p>
               <p>...</p>
               <p>Import bank statement</p>
-              <p>...</p>
+              <p>...</p> */}
               <p>Fast, simple, and responsive</p>
             </Col>
             <Col className="diagram" sm>

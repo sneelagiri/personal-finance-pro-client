@@ -32,3 +32,11 @@ p {
   margin-bottom: 0.5rem;
   font-family: "Caladea", serif;
 }
+
+.grid {
+  display: inline-flex;
+}
+
+.featureList {
+  max-width: 50%;
+}
