@@ -1,5 +1,4 @@
 import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
