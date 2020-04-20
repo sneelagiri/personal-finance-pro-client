@@ -11,9 +11,7 @@ import Expenses from "./components/Expenses/Expenses";
 import RecurringBills from "./components/RecurringBills/RecurringBills";
 import Savings from "./components/Savings/Savings";
 
-interface Props {}
-
-export default function App({}: Props): ReactElement {
+export default function App(): ReactElement {
   return (
     <Router>
       <Header />
