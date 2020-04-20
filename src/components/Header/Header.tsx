@@ -12,7 +12,7 @@ import {
   AUTH_TOKEN,
   LATEST_BUDGET,
   CURRENT_BUDGET,
-  USER_DATA
+  USER_DATA,
 } from "../../constants";
 import "./header.css";
 
@@ -43,7 +43,7 @@ class Header extends Component<Props, State> {
     if (typeof overviewBudgetJSON === "string") {
       overviewBudget = JSON.parse(overviewBudgetJSON);
     }
-
+    console.log(latestBudget, overviewBudget);
     return (
       <div className="header">
         <Navbar bg="success" variant="dark">
@@ -73,7 +73,8 @@ class Header extends Component<Props, State> {
                 <Nav.Link as={Link} to="/your-finances">
                   Your Finances
                 </Nav.Link>
-              ) : authToken && typeof overviewBudget === "object" ? (
+              ) : (authToken && typeof overviewBudget === "object") ||
+                typeof latestBudget === "object" ? (
                 <>
                   <Nav.Link as={Link} to="/overview">
                     Overview
@@ -96,6 +97,9 @@ class Header extends Component<Props, State> {
                   size="sm"
                   onClick={() => {
                     localStorage.removeItem(AUTH_TOKEN);
+                    localStorage.removeItem(CURRENT_BUDGET);
+                    localStorage.removeItem(LATEST_BUDGET);
+                    localStorage.removeItem(USER_DATA);
                     this.props.history.push(`/`);
                   }}
                   className="headerButton"
