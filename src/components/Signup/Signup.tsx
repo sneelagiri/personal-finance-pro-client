@@ -21,7 +21,7 @@ export default function Signup({}: Props): ReactElement {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signup, { data }] = useMutation(SIGNUP_MUTATION);
+  const [signup] = useMutation(SIGNUP_MUTATION);
   const history = useHistory();
   const _storeToken = (data: Response) => {
     const { token } = data.signup;
@@ -43,7 +43,7 @@ export default function Signup({}: Props): ReactElement {
               password: password,
             },
           });
-          _storeToken(fetchToken.data)
+          _storeToken(fetchToken.data);
         }}
       >
         <Form.Group controlId="formFirstName">
