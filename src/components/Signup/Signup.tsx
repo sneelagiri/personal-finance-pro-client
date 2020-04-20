@@ -4,7 +4,7 @@ import { SIGNUP_MUTATION } from "../../mutations/mutations";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { AUTH_TOKEN } from "../../constants";
+import { AUTH_TOKEN, USER_DATA } from "../../constants";
 
 interface Props {}
 
@@ -14,6 +14,12 @@ interface Response {
 
 interface Token {
   token: string;
+  user: UserData;
+}
+
+interface UserData {
+  firstName: string;
+  lastName: string;
 }
 
 export default function Signup({}: Props): ReactElement {
@@ -24,8 +30,10 @@ export default function Signup({}: Props): ReactElement {
   const [signup] = useMutation(SIGNUP_MUTATION);
   const history = useHistory();
   const _storeToken = (data: Response) => {
-    const { token } = data.signup;
+    console.log(data);
+    const { token, user } = data.signup;
     localStorage.setItem(AUTH_TOKEN, token);
+    localStorage.setItem(USER_DATA, JSON.stringify(user));
     history.push("/");
   };
   return (
