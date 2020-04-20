@@ -8,13 +8,33 @@ import { AUTH_TOKEN, LATEST_BUDGET, USER_DATA } from "../../constants";
 
 interface Props {}
 
+interface Response {
+  login: LoginData;
+}
+
+interface LoginData {
+  token: string;
+  user: UserData;
+  latestBudget: BudgetData;
+}
+
+interface UserData {
+  firstName: string;
+  lastName: string;
+}
+
+interface BudgetData {
+  startDate: string;
+  endDate: string;
+}
+
 export default function Login({}: Props): ReactElement {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useMutation(LOGIN_MUTATION);
   const history = useHistory();
 
-  const _confirm = async (data: any) => {
+  const _confirm = async (data: Response) => {
     console.log(data);
     const { token, user, latestBudget } = data.login;
     _saveUserData(token, user, latestBudget);
