@@ -14,6 +14,10 @@ const SIGNUP_MUTATION = gql`
       lastName: $lastName
     ) {
       token
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
