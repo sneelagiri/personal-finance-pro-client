@@ -1,154 +1,132 @@
-import React, { Component } from "react";
+import React, { ReactElement, useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Mutation } from "react-apollo";
-
-import gql from "graphql-tag";
-import { History, LocationState } from "history";
 import moment from "moment";
 import { BUDGET_ENTRY_MUTATION } from "../../mutations/mutations";
 import { CURRENT_BUDGET } from "../../constants";
 
-interface Props {
-  history: History<LocationState>;
-}
-interface State {
-  startDate: string;
-  endDate: string;
-  stringTotal: string;
-  total: number;
-  stringSavingsTarget: string;
-  savingsTarget: number;
-}
+interface Props {}
 
-export default class BudgetEntry extends Component<Props, State> {
-  state: State = {
-    startDate: "",
-    endDate: "",
-    stringTotal: "",
-    total: 0.0,
-    stringSavingsTarget: "",
-    savingsTarget: 0.0
+interface PostBudget {
+  postBudget: {
+    total: string;
   };
+}
 
-  render() {
-    const {
-      startDate,
-      endDate,
-      stringTotal,
-      stringSavingsTarget,
-      total,
-      savingsTarget
-    } = this.state;
-    return (
-      <div>
-        <h1>Start here!</h1>
-        <Form
-          className="form"
-          onSubmit={(e: any) => {
-            e.preventDefault();
-          }}
-        >
-          <Form.Group controlId="formStartDate">
-            <Form.Label>Select Start Date</Form.Label>
-            <Form.Control
-              onChange={(e: any) =>
-                this.setState({
-                  startDate: e.target.value,
-                  endDate: moment(e.target.value, "YYYY-MM-DD")
-                    .add(1, "months")
-                    .subtract(1, "days")
-                    .format("YYYY-MM-DD")
-                })
-              }
-              type="date"
-              name="startDate"
-              placeholder="Budget start date"
-              value={startDate}
-            />
-          </Form.Group>
-          <Form.Group controlId="formEndDate">
-            <Form.Label>End Date</Form.Label>
-            <Form.Control
-              // onChange={(e: any) => this.setState({ endDate: e.target.value })}
-              type="date"
-              name="endDate"
-              value={endDate}
-              readOnly
-            />
-          </Form.Group>
+export default function BudgetEntry({}: Props): ReactElement {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [endDateTime, setEndDateTime] = useState("");
+  const [stringTotal, setStringTotal] = useState("");
+  const [total, setTotal] = useState(0);
+  const [stringSavingsTarget, setStringSavingsTarget] = useState("");
+  const [savingsTarget, setSavingsTarget] = useState(0);
 
-          <Form.Group controlId="formBudget">
-            <Form.Label>
-              <b>This month's budget</b>
-            </Form.Label>
-            <Form.Control
-              as="input"
-              onChange={(e: any) =>
-                this.setState({
-                  stringTotal: e.target.value,
-                  total: parseFloat(e.target.value)
-                })
-              }
-              type="number"
-              name="total"
-              value={stringTotal}
-              placeholder="e.g. 2450.00"
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formSavings">
-            <Form.Label>
-              <b>This month's savings target</b>
-            </Form.Label>
-            <Form.Control
-              onChange={(e: any) =>
-                this.setState({
-                  stringSavingsTarget: e.target.value,
-                  savingsTarget: parseFloat(e.target.value)
-                })
-              }
-              type="number"
-              name="total"
-              value={stringSavingsTarget}
-              placeholder="e.g. 30%"
-              required
-            />
-          </Form.Group>
-          <Mutation
-            mutation={BUDGET_ENTRY_MUTATION}
-            variables={{
-              startDate,
-              endDate,
-              total,
-              savingsTarget
-            }}
-            onError={(error: any) => {
-              console.log(error.networkError.result.errors);
-              console.log(error.graphQLErrors);
-            }}
-            onCompleted={(data: any) => {
-              this._confirm(data);
-            }}
-          >
-            {(mutation: any) => (
-              <Button variant="success" type="submit" onClick={mutation}>
-                Save
-              </Button>
-            )}
-          </Mutation>
-        </Form>
-      </div>
-    );
-  }
-  _confirm = async (data: any) => {
+  const [postBudget] = useMutation(BUDGET_ENTRY_MUTATION);
+
+  const history = useHistory();
+  const _confirm = async (data: PostBudget) => {
     const { postBudget } = data;
-    console.log(postBudget);
-    this._saveUserData(postBudget);
-    this.props.history.push(`/overview`);
+    console.log(data);
+    _saveUserData(postBudget);
+    history.push(`/overview`);
   };
 
-  _saveUserData = (currentBudget: object) => {
+  const _saveUserData = (currentBudget: object) => {
     localStorage.setItem(CURRENT_BUDGET, JSON.stringify(currentBudget));
   };
+
+  return (
+    <div>
+      <h1>Start here!</h1>
+      <Form
+        className="form"
+        onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          const createdBudget = await postBudget({
+            variables: {
+              startDate: startDate,
+              endDate: endDateTime,
+              total: total,
+              savingsTarget: savingsTarget,
+            },
+          });
+          _confirm(createdBudget.data);
+        }}
+      >
+        <Form.Group controlId="formStartDate">
+          <Form.Label>Select Start Date</Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setStartDate(e.target.value);
+              const endDate = moment(e.target.value, "YYYY-MM-DD")
+                .add({ months: 1 })
+                .subtract(1, "days")
+                .format("YYYY-MM-DD");
+
+              const endDateTime = moment(e.target.value, "YYYY-MM-DDTHH:mm:ss")
+                .add({ seconds: 59, minutes: 59, hours: 23, months: 1 })
+                .subtract(1, "days")
+                .format("YYYY-MM-DDTHH:mm:ss");
+              setEndDateTime(endDateTime);
+              setEndDate(endDate);
+            }}
+            type="date"
+            name="startDate"
+            placeholder="Budget start date"
+            value={startDate}
+          />
+        </Form.Group>
+        <Form.Group controlId="formEndDate">
+          <Form.Label>End Date</Form.Label>
+          <Form.Control
+            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ endDate: e.target.value })}
+            type="date"
+            name="endDate"
+            value={endDate}
+            readOnly
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBudget">
+          <Form.Label>
+            <b>This month's budget</b>
+          </Form.Label>
+          <Form.Control
+            as="input"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setStringTotal(e.target.value);
+              setTotal(parseFloat(e.target.value));
+            }}
+            type="number"
+            name="total"
+            value={stringTotal}
+            placeholder="e.g. 2450.00"
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="formSavings">
+          <Form.Label>
+            <b>This month's savings target</b>
+          </Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setStringSavingsTarget(e.target.value);
+              setSavingsTarget(parseFloat(e.target.value));
+            }}
+            type="number"
+            name="total"
+            value={stringSavingsTarget}
+            placeholder="e.g. 30%"
+            required
+          />
+        </Form.Group>
+        <Button variant="success" type="submit">
+          Save
+        </Button>
+      </Form>
+    </div>
+  );
 }
