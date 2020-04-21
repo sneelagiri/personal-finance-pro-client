@@ -12,6 +12,9 @@ h6 {
 
 .title {
   margin-bottom: 40px;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 4rem;
+  color: #dcdd43;
 }
 
 .body {
