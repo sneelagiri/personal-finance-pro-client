@@ -1,3 +1,9 @@
 .overview-header {
-  color: darkgreen;
+  color: darkcyan;
+  font-weight: 600;
+}
+
+.budget-header {
+  font-weight: 100;
+  font-size: 2rem;
 }
