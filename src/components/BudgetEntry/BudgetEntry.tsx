@@ -29,7 +29,6 @@ export default function BudgetEntry({}: Props): ReactElement {
   const history = useHistory();
   const _confirm = async (data: PostBudget) => {
     const { postBudget } = data;
-    console.log(data);
     _saveUserData(postBudget);
     history.push(`/overview`);
   };
