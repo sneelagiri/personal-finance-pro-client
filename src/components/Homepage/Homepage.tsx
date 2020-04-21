@@ -22,7 +22,7 @@ export default class Homepage extends Component<Props> {
         <Container fluid>
           <Row className="title">
             <Col>
-              <h1>Manage your finances like a pro!</h1>
+              <h1 className="title">Manage your finances like a pro!</h1>
             </Col>
           </Row>
           <Row className="body">
