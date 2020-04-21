@@ -45,7 +45,7 @@ class Header extends Component<Props, State> {
     }
     return (
       <div className="header">
-        <Navbar bg="success" variant="dark">
+        <Navbar bg="blue" variant="dark">
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} roundedCircle className="brandImage" />
           </Navbar.Brand>
