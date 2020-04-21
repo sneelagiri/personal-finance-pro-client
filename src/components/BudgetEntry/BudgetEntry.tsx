@@ -18,6 +18,7 @@ interface PostBudget {
 export default function BudgetEntry({}: Props): ReactElement {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [endDateTime, setEndDateTime] = useState("");
   const [stringTotal, setStringTotal] = useState("");
   const [total, setTotal] = useState(0);
   const [stringSavingsTarget, setStringSavingsTarget] = useState("");
@@ -47,7 +48,7 @@ export default function BudgetEntry({}: Props): ReactElement {
           const createdBudget = await postBudget({
             variables: {
               startDate: startDate,
-              endDate: endDate,
+              endDate: endDateTime,
               total: total,
               savingsTarget: savingsTarget,
             },
@@ -61,9 +62,15 @@ export default function BudgetEntry({}: Props): ReactElement {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setStartDate(e.target.value);
               const endDate = moment(e.target.value, "YYYY-MM-DD")
-                .add(1, "months")
+                .add({ months: 1 })
                 .subtract(1, "days")
                 .format("YYYY-MM-DD");
+
+              const endDateTime = moment(e.target.value, "YYYY-MM-DDTHH:mm:ss")
+                .add({ seconds: 59, minutes: 59, hours: 23, months: 1 })
+                .subtract(1, "days")
+                .format("YYYY-MM-DDTHH:mm:ss");
+              setEndDateTime(endDateTime);
               setEndDate(endDate);
             }}
             type="date"
