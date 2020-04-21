@@ -122,7 +122,7 @@ export default function BudgetEntry({}: Props): ReactElement {
             required
           />
         </Form.Group>
-        <Button variant="success" type="submit">
+        <Button variant="primary" type="submit">
           Save
         </Button>
       </Form>

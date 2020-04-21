@@ -118,7 +118,7 @@ export default function Signup({}: Props): ReactElement {
             required
           />
         </Form.Group>
-        <Button variant="success" type="submit">
+        <Button variant="primary" type="submit">
           Signup
         </Button>
       </Form>

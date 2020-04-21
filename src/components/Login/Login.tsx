@@ -93,7 +93,7 @@ export default function Login({}: Props): ReactElement {
               value={password}
             />
           </Form.Group>
-          <Button variant="success" type="submit">
+          <Button variant="primary" type="submit">
             Login
           </Button>
         </Form>

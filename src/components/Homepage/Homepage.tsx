@@ -50,7 +50,7 @@ export default class Homepage extends Component<Props> {
             <Col>
               {authToken == null ? (
                 <Link to="/signup">
-                  <Button variant="success" size="lg">
+                  <Button variant="primary" size="lg">
                     Sign Up Now!
                   </Button>
                 </Link>
