@@ -35,10 +35,8 @@ export default function Login({}: Props): ReactElement {
   const history = useHistory();
 
   const _confirm = async (data: Response) => {
-    console.log(data);
     const { token, user, latestBudget } = data.login;
     _saveUserData(token, user, latestBudget);
-    // console.log(token);
     if (latestBudget) {
       history.push(`/overview`);
     } else {

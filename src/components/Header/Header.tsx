@@ -43,7 +43,6 @@ class Header extends Component<Props, State> {
     if (typeof overviewBudgetJSON === "string") {
       overviewBudget = JSON.parse(overviewBudgetJSON);
     }
-    console.log(latestBudget, overviewBudget);
     return (
       <div className="header">
         <Navbar bg="success" variant="dark">

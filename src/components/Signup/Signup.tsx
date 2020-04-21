@@ -30,7 +30,6 @@ export default function Signup({}: Props): ReactElement {
   const [signup] = useMutation(SIGNUP_MUTATION);
   const history = useHistory();
   const _storeToken = (data: Response) => {
-    console.log(data);
     const { token, user } = data.signup;
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER_DATA, JSON.stringify(user));

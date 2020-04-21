@@ -7,7 +7,6 @@ interface Props {}
 
 export default function Overview({}: Props): ReactElement {
   const { loading, error, data } = useQuery(BUDGET_QUERY);
-  console.log(data);
   return (
     <div>
       <h1>Overview</h1>
