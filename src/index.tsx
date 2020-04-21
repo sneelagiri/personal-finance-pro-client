@@ -9,9 +9,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { AUTH_TOKEN } from "./constants";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "./index.css";
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000"
+  uri: "http://localhost:4000",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -19,19 +19,21 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ""
-    }
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <div className="universal">
+      <App />
+    </div>
   </ApolloProvider>,
   document.getElementById("root")
 );
