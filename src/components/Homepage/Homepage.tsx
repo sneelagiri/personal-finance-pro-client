@@ -22,7 +22,7 @@ export default class Homepage extends Component<Props> {
         <Container fluid>
           <Row className="title">
             <Col>
-              <h1>Manage your finances like a pro!</h1>
+              <h1 className="title">Manage your finances like a pro!</h1>
             </Col>
           </Row>
           <Row className="body">
@@ -36,10 +36,10 @@ export default class Homepage extends Component<Props> {
               <p>...</p>
               <p>Access on all of your devices</p>
               <p>...</p>
-              <p>Get bill alerts</p>
+              {/* <p>Get bill alerts</p>
               <p>...</p>
               <p>Import bank statement</p>
-              <p>...</p>
+              <p>...</p> */}
               <p>Fast, simple, and responsive</p>
             </Col>
             <Col className="diagram" sm>
@@ -50,7 +50,7 @@ export default class Homepage extends Component<Props> {
             <Col>
               {authToken == null ? (
                 <Link to="/signup">
-                  <Button variant="success" size="lg">
+                  <Button variant="primary" size="lg">
                     Sign Up Now!
                   </Button>
                 </Link>

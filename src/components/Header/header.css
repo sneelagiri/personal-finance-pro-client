@@ -1,12 +1,13 @@
 .header {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  font-family: "Caladea", serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .header .navbar-dark .navbar-nav .nav-link {
   color: white;
   text-emphasis: bold;
+  font-weight: 600;
 }
 
 .brandImage {
@@ -19,4 +20,8 @@
 
 .header .navbar-dark .navbar-text {
   color: white;
+}
+
+.bg-blue {
+  background-color: #8ec6c5;
 }

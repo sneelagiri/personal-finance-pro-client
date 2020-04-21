@@ -7,11 +7,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Merriweather", serif;
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
 .title {
   margin-bottom: 40px;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 4rem;
+  color: #dcdd43;
 }
 
 .body {
@@ -21,7 +24,7 @@ h6 {
 button {
   margin-bottom: 30px;
   text-align: center;
-  font-family: "Merriweather", serif;
+  font-family: "Raleway", sans-serif;
 }
 
 h2 {
@@ -30,5 +33,13 @@ h2 {
 
 p {
   margin-bottom: 0.5rem;
-  font-family: "Caladea", serif;
+  font-family: "Raleway", sans-serif;
+}
+
+.grid {
+  display: inline-flex;
+}
+
+.featureList {
+  max-width: 50%;
 }
