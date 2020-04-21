@@ -3,11 +3,13 @@ import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
 import CanvasJSReact from "../../assets/canvasjs.react";
 import { BUDGET_QUERY } from "../../queries/queries";
+import "./overview.css";
 
 interface Props {}
 
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 export default function Overview({}: Props): ReactElement {
   const { loading, error, data } = useQuery(BUDGET_QUERY);
   if (data) {
@@ -32,7 +34,9 @@ export default function Overview({}: Props): ReactElement {
       animationEnabled: true,
       title: {
         text: `${startDateInWords} - ${endDateInWords}`,
-        fontFamily: "Merriweather",
+        fontFamily: "sans-serif",
+        fontSize: 24,
+        fontColor: "black",
       },
 
       data: [
@@ -44,7 +48,7 @@ export default function Overview({}: Props): ReactElement {
           indexLabel: "{label} - #percent%",
           percentFormatString: "#0.##",
           yValueFormatString: "€#,###.00",
-          indexLabelFontFamily: "Caladea",
+          indexLabelFontFamily: "sans-serif",
           toolTipContent: "{y} (#percent%)",
           dataPoints: [
             { y: savingsAmount, label: "Savings Target" },
@@ -56,8 +60,8 @@ export default function Overview({}: Props): ReactElement {
     };
     return (
       <div>
-        <h1>Overview</h1>
-        <h1>Budget - Total: €{total}</h1>
+        <h1 className="overview-header">Overview</h1>
+        <h1 className="budget-header">Budget - Total: €{total}</h1>
         <CanvasJSChart options={options} />
       </div>
     );
