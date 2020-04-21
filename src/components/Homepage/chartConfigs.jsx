@@ -3,9 +3,10 @@ const options = {
   animationEnabled: true,
   title: {
     text: "Budget - April 2020: €2,235.00",
-    fontFamily: "sans-serif",
+    fontFamily: "Montserrat Alternates",
     fontColor: "black",
   },
+  backgroundColor: "rgb(248, 251, 251)",
 
   data: [
     {
@@ -16,7 +17,8 @@ const options = {
       indexLabel: "{label} - #percent%",
       percentFormatString: "#0.##",
       yValueFormatString: "€#,###.00",
-      indexLabelFontFamily: "sans-serif",
+      indexLabelFontFamily: "Raleway",
+
       toolTipContent: "{y} (#percent%)",
       dataPoints: [
         { y: 670.5, label: "Savings Target" },

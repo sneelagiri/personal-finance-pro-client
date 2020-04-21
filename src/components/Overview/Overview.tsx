@@ -34,11 +34,11 @@ export default function Overview({}: Props): ReactElement {
       animationEnabled: true,
       title: {
         text: `${startDateInWords} - ${endDateInWords}`,
-        fontFamily: "sans-serif",
+        fontFamily: "Montserrat Alternates",
         fontSize: 24,
         fontColor: "black",
       },
-
+      backgroundColor: "rgb(248, 251, 251)",
       data: [
         {
           type: "pie",
@@ -48,7 +48,7 @@ export default function Overview({}: Props): ReactElement {
           indexLabel: "{label} - #percent%",
           percentFormatString: "#0.##",
           yValueFormatString: "€#,###.00",
-          indexLabelFontFamily: "sans-serif",
+          indexLabelFontFamily: "Raleway",
           toolTipContent: "{y} (#percent%)",
           dataPoints: [
             { y: savingsAmount, label: "Savings Target" },
