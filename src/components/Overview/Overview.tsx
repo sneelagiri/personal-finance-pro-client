@@ -11,7 +11,8 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function Overview({}: Props): ReactElement {
-  const { loading, error, data } = useQuery(BUDGET_QUERY);
+  const { loading, error, data, refetch } = useQuery(BUDGET_QUERY);
+  refetch();
   if (data) {
     console.log(data);
     const {
