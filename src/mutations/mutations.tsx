@@ -56,4 +56,31 @@ const BUDGET_ENTRY_MUTATION = gql`
   }
 `;
 
-export { SIGNUP_MUTATION, LOGIN_MUTATION, BUDGET_ENTRY_MUTATION };
+const POST_EXPENSE_MUTATION = gql`
+  mutation PostExpenseMutation(
+    $expenseAmount: Float!
+    $expenseDesc: String
+    $expenseCategory: String!
+    $expenseDate: DateTime!
+    $budgetId: ID!
+  ) {
+    postExpense(
+      expenseAmount: $expenseAmount
+      expenseDesc: $expenseDesc
+      expenseCategory: $expenseCategory
+      expenseDate: $expenseDate
+      budgetId: $budgetId
+    ) {
+      expenseAmount
+      expenseDesc
+      expenseCategory
+    }
+  }
+`;
+
+export {
+  SIGNUP_MUTATION,
+  LOGIN_MUTATION,
+  BUDGET_ENTRY_MUTATION,
+  POST_EXPENSE_MUTATION,
+};
