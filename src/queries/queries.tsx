@@ -21,4 +21,16 @@ const BUDGET_QUERY = gql`
   }
 `;
 
-export { BUDGET_QUERY };
+const EXPENSES_QUERY = gql`
+  query ExpensesQuery {
+    currentExpenses {
+      id
+      expenseAmount
+      expenseDate
+      expenseCategory
+      expenseDesc
+    }
+  }
+`;
+
+export { BUDGET_QUERY, EXPENSES_QUERY };
