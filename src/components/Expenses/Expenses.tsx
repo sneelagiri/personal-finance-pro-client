@@ -1,12 +1,11 @@
 import React, { ReactElement, useState } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import moment from "moment";
 import { POST_EXPENSE_MUTATION } from "../../mutations/mutations";
-import { BUDGET_QUERY } from "../../queries/queries";
+import { EXPENSES_QUERY, BUDGET_QUERY } from "../../queries/queries";
 
 interface Props {}
 
@@ -17,10 +16,15 @@ export default function Expenses({}: Props): ReactElement {
   const [expenseDate, setExpenseDate] = useState("");
 
   const [postExpense] = useMutation(POST_EXPENSE_MUTATION);
+  const {
+    loading: loadingB,
+    data: dataB,
+    error: errorB,
+    refetch: refetchB,
+  } = useQuery(BUDGET_QUERY);
+  const { loading, data, error, refetch } = useQuery(EXPENSES_QUERY);
+  let counter = 0;
 
-  const { loading, data, error } = useQuery(BUDGET_QUERY);
-
-  const history = useHistory();
   return (
     <div>
       <h1>Add an expense</h1>
@@ -36,10 +40,10 @@ export default function Expenses({}: Props): ReactElement {
               expenseDesc: expenseDesc,
               expenseCategory: expenseCategory,
               expenseDate: expenseDate,
-              budgetId: data.currentBudget.id,
+              budgetId: dataB.currentBudget.id,
             },
           });
-          console.log(createdExpense.errors);
+          refetch();
         }}
       >
         <Form.Group controlId="formExpenseAmount">
@@ -114,7 +118,39 @@ export default function Expenses({}: Props): ReactElement {
           Save
         </Button>
       </Form>
-      <Table></Table>
+      {loading ? (
+        <h2>Loading expenses</h2>
+      ) : error ? (
+        <p>Error fetching expenses: {error}</p>
+      ) : data.currentExpenses.length > 0 ? (
+        <Table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Expense Amount</th>
+              <th>Expense Date</th>
+              <th>Expense Category</th>
+              <th>Expense Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.currentExpenses.map((expense: any) => {
+              counter++;
+              return (
+                <tr>
+                  <td>{counter}</td>
+                  <td>€{expense.expenseAmount}</td>
+                  <td>{moment(expense.expenseDate).format("ll")}</td>
+                  <td>{expense.expenseCategory}</td>
+                  <td>{expense.expenseDesc}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      ) : (
+        <h2>No expenses found</h2>
+      )}
     </div>
   );
 }
