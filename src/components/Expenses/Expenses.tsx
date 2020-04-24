@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import moment from "moment";
 import { POST_EXPENSE_MUTATION } from "../../mutations/mutations";
 import { EXPENSES_QUERY, BUDGET_QUERY } from "../../queries/queries";
-
+import "./expenses.css";
 interface Props {}
 
 export default function Expenses({}: Props): ReactElement {
@@ -26,14 +26,13 @@ export default function Expenses({}: Props): ReactElement {
   let counter = 0;
 
   return (
-    <div>
+    <div className="expenses">
       <h1>Add an expense</h1>
       <Form
         className="form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           console.log(expenseAmount, expenseDesc, expenseCategory, expenseDate);
-
           const createdExpense = await postExpense({
             variables: {
               expenseAmount: parseFloat(expenseAmount),
@@ -123,7 +122,7 @@ export default function Expenses({}: Props): ReactElement {
       ) : error ? (
         <p>Error fetching expenses: {error}</p>
       ) : data.currentExpenses.length > 0 ? (
-        <Table>
+        <Table className="expenses-table">
           <thead>
             <tr>
               <th>#</th>

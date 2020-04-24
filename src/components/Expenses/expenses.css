@@ -1,0 +1,19 @@
+.form {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.expenses-table.expenses-table.expenses-table {
+  margin-top: 1.15rem;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 6.25rem;
+}
+
+select {
+  text-align: center;
+  text-align-last: center;
+  /* webkit*/
+}

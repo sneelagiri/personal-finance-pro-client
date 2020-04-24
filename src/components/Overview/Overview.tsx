@@ -60,7 +60,7 @@ export default function Overview({}: Props): ReactElement {
       ],
     };
     return (
-      <div>
+      <div className="overview">
         <h1 className="overview-header">Overview</h1>
         <h1 className="budget-header">Budget - Total: €{total}</h1>
         <CanvasJSChart options={options} />

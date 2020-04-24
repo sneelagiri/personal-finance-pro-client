@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { AUTH_TOKEN, USER_DATA } from "../../constants";
-
+import "./signup.css";
 interface Props {}
 
 interface Response {
@@ -36,7 +36,7 @@ export default function Signup({}: Props): ReactElement {
     history.push("/");
   };
   return (
-    <div>
+    <div className="signup">
       <h1>Signup</h1>
       <Form
         className="form"

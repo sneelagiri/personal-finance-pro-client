@@ -18,7 +18,7 @@ export default class Homepage extends Component<Props> {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN);
     return (
-      <div>
+      <div className="homepage">
         <Container fluid>
           <Row className="title">
             <Col>

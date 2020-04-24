@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import moment from "moment";
 import { BUDGET_ENTRY_MUTATION } from "../../mutations/mutations";
 import { CURRENT_BUDGET } from "../../constants";
-
+import "./budget-entry.css";
 interface Props {}
 
 interface PostBudget {

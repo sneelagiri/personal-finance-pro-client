@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LOGIN_MUTATION } from "../../mutations/mutations";
 import { AUTH_TOKEN, LATEST_BUDGET, USER_DATA } from "../../constants";
-
+import "./login.css";
 interface Props {}
 
 interface Response {
@@ -53,7 +53,7 @@ export default function Login({}: Props): ReactElement {
   };
 
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
       <div>
         <Form
