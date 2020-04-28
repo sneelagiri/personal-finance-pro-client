@@ -115,6 +115,7 @@ export default function Signup({}: Props): ReactElement {
             name="password"
             value={password}
             placeholder="Enter a safe password"
+            autoComplete="new-password"
             required
           />
         </Form.Group>
