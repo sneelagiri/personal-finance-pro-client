@@ -47,3 +47,14 @@ p {
 .homepage {
   padding-bottom: 85px;
 }
+
+@media screen and (max-width: 2560px) and (min-width: 1600px) {
+  .homepage {
+    padding-top: 200px;
+    padding-bottom: 300px;
+  }
+
+  .signup-button {
+    padding-top: 50px;
+  }
+}
