@@ -33,7 +33,7 @@ export default function Signup({}: Props): ReactElement {
     const { token, user } = data.signup;
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER_DATA, JSON.stringify(user));
-    history.push("/");
+    history.push("/your-finances");
   };
   return (
     <div className="signup">
