@@ -79,6 +79,7 @@ export default function Login({}: Props): ReactElement {
               name="email"
               placeholder="Your email address"
               value={email}
+              className="field"
             />
           </Form.Group>
           <Form.Group controlId="formPassword">
@@ -91,6 +92,7 @@ export default function Login({}: Props): ReactElement {
               name="password"
               placeholder="Your password"
               value={password}
+              className="field"
             />
           </Form.Group>
           <Button variant="primary" type="submit">
