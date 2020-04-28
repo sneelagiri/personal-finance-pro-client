@@ -46,12 +46,12 @@ class Header extends Component<Props, State> {
     return (
       <div className="header">
         <header>
-          <Navbar bg="blue" variant="dark">
+          <Navbar bg="blue" variant="dark" expand="md">
             <Navbar.Brand as={Link} to="/">
               <Image src={logo} roundedCircle className="brandImage" />
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto linkColor">
                 {authToken == null && (
                   <>
