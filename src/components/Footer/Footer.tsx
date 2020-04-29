@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
+import React, { ReactElement } from "react";
 import "./footer.css";
+
 interface Props {}
-interface State {}
 
-export default class Footer extends Component<Props, State> {
-  state = {};
-
-  render() {
-    return (
-      <footer className="footer">
-        <p className="footerText">Made with ❤️ by Shashank Neelagiri</p>
-      </footer>
-    );
-  }
+export default function Footer({}: Props): ReactElement {
+  return (
+    <footer className="footer">
+      <p className="footerText">
+        Made with{" "}
+        <span role="img" aria-label="love">
+          ❤️
+        </span>{" "}
+        by Shashank Neelagiri
+      </p>
+    </footer>
+  );
 }

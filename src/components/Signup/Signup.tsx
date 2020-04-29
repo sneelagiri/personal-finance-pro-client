@@ -1,129 +1,128 @@
-import React, { Component } from "react";
+import React, { ReactElement, useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { SIGNUP_MUTATION } from "../../mutations/mutations";
+import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { AUTH_TOKEN } from "../../constants";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
-import { History, LocationState } from "history";
+import { AUTH_TOKEN, USER_DATA } from "../../constants";
+import "./signup.css";
+interface Props {}
 
-interface Props {
-  history: History<LocationState>;
+interface Response {
+  signup: Token;
 }
-interface State {}
 
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation(
-    $email: String!
-    $password: String!
-    $firstName: String!
-    $lastName: String!
-  ) {
-    signup(
-      email: $email
-      password: $password
-      firstName: $firstName
-      lastName: $lastName
-    ) {
-      token
-    }
-  }
-`;
+interface Token {
+  token: string;
+  user: UserData;
+}
 
-export default class Signup extends Component<Props, State> {
-  state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  };
+interface UserData {
+  firstName: string;
+  lastName: string;
+}
 
-  render() {
-    const { firstName, lastName, email, password } = this.state;
-    return (
-      <div>
-        <h1>Signup</h1>
-        <Form
-          className="form"
-          onSubmit={(e: any) => {
-            e.preventDefault();
-          }}
-        >
-          <Form.Group controlId="formFirstName">
-            <Form.Label>First Name:</Form.Label>
-            <Form.Control
-              onChange={(e: any) =>
-                this.setState({ firstName: e.target.value })
-              }
-              type="text"
-              name="firstName"
-              placeholder="Your first name"
-              value={firstName}
-            />
-          </Form.Group>
-          <Form.Group controlId="formLastName">
-            <Form.Label>Last Name:</Form.Label>
-            <Form.Control
-              onChange={(e: any) => this.setState({ lastName: e.target.value })}
-              type="text"
-              name="lastName"
-              placeholder="Your last name"
-              value={lastName}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formEmail">
-            <Form.Label>
-              <b>Email address:</b>
-            </Form.Label>
-            <Form.Control
-              onChange={(e: any) => this.setState({ email: e.target.value })}
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Your email"
-              required
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="formPassword">
-            <Form.Label>
-              <b>Password:</b>
-            </Form.Label>
-            <Form.Control
-              onChange={(e: any) => this.setState({ password: e.target.value })}
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Enter a safe password"
-              required
-            />
-          </Form.Group>
-          <Mutation
-            mutation={SIGNUP_MUTATION}
-            variables={{ email, password, firstName, lastName }}
-            onCompleted={(data: any) => this._confirm(data)}
-          >
-            {(mutation: any) => (
-              <Button variant="primary" type="submit" onClick={mutation}>
-                Signup
-              </Button>
-            )}
-          </Mutation>
-        </Form>
-      </div>
-    );
-  }
-  _confirm = async (data: any) => {
-    const { token } = data.signup;
-    this._saveUserData(token);
-    console.log(token);
-    this.props.history.push(`/`);
-  };
-
-  _saveUserData = (token: string) => {
+export default function Signup({}: Props): ReactElement {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [signup] = useMutation(SIGNUP_MUTATION);
+  const history = useHistory();
+  const _storeToken = (data: Response) => {
+    const { token, user } = data.signup;
     localStorage.setItem(AUTH_TOKEN, token);
+    localStorage.setItem(USER_DATA, JSON.stringify(user));
+    history.push("/your-finances");
   };
+  return (
+    <div className="signup">
+      <h1>Signup</h1>
+      <Form
+        className="signup-form"
+        onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          const fetchToken = await signup({
+            variables: {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+            },
+          });
+          _storeToken(fetchToken.data);
+        }}
+      >
+        <Form.Group controlId="formFirstName">
+          <Form.Label>
+            <b>First Name:</b>
+          </Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              setFirstName(e.target.value)
+            }
+            type="text"
+            name="firstName"
+            placeholder="Your first name"
+            value={firstName}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="formLastName">
+          <Form.Label>
+            <b>Last Name:</b>
+          </Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setLastName(e.target.value)
+            }
+            type="text"
+            name="lastName"
+            placeholder="Your last name"
+            value={lastName}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formEmail">
+          <Form.Label>
+            <b>Email address:</b>
+          </Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Your email"
+            required
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formPassword">
+          <Form.Label>
+            <b>Password:</b>
+          </Form.Label>
+          <Form.Control
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Enter a safe password"
+            autoComplete="new-password"
+            required
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Signup
+        </Button>
+      </Form>
+    </div>
+  );
 }

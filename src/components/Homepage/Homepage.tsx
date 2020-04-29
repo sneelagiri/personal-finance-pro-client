@@ -1,90 +1,64 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import "./homepage.css";
 import CanvasJSReact from "../../assets/canvasjs.react";
+import { options } from "./chartConfigs";
+import { AUTH_TOKEN } from "../../constants";
+import "./homepage.css";
+
+interface Props {}
 
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-interface Props {}
-
-interface State {}
-
-export default class Homepage extends Component<Props, State> {
-  state = {};
-
+export default class Homepage extends Component<Props> {
   render() {
-    const options = {
-      exportEnabled: true,
-      animationEnabled: true,
-      title: {
-        text: "Budget - March 2020: €2,235.00",
-        fontFamily: "Merriweather"
-      },
-
-      data: [
-        {
-          type: "pie",
-          // showInLegend: "true",
-          legendText: "{label}",
-          indexLabelFontSize: 16,
-          indexLabel: "{label} - #percent%",
-          percentFormatString: "#0.##",
-          yValueFormatString: "€#,###.00",
-          indexLabelFontFamily: "Caladea",
-          toolTipContent: "{y} (#percent%)",
-          dataPoints: [
-            { y: 670.5, label: "Savings Target" },
-            { y: 340.84, label: "Transportation" },
-            { y: 657.09, label: "Rent" },
-            { y: 234.68, label: "Groceries" },
-            { y: 93.87, label: "Clothing" },
-            { y: 111.75, label: "Donations" },
-            { y: 46.94, label: "Misc." },
-            { y: 79.34, label: "Remaining Budget" }
-          ]
-        }
-      ]
-    };
+    const authToken = localStorage.getItem(AUTH_TOKEN);
     return (
-      <Container fluid>
-        <Row className="title">
-          <Col>
-            <h1>Manage your finances like a pro!</h1>
-          </Col>
-        </Row>
-        <Row className="body">
-          <Col className="featureList" sm>
-            <h2>Features</h2>
-            <p>Get informative visuals</p>
-            <p>...</p>
-            <p>Categorize expenses</p>
-            <p>...</p>
-            <p>Set savings targets</p>
-            <p>...</p>
-            <p>Access on all of your devices</p>
-            <p>...</p>
-            <p>Get bill alerts</p>
-            <p>...</p>
-            <p>Import bank statement</p>
-            <p>...</p>
-            <p>Fast, simple, and responsive</p>
-          </Col>
-          <Col className="diagram" sm>
-            <CanvasJSChart options={options} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="success" size="lg">
-              Sign Up Now!
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+      <div className="homepage">
+        <Container fluid>
+          <Row className="title">
+            <Col>
+              <h1 className="title">Manage your finances like a pro!</h1>
+            </Col>
+          </Row>
+          <Row className="body">
+            <Col className="featureList">
+              <h2>Features</h2>
+              <p>Get informative visuals</p>
+              <p>...</p>
+              <p>Categorize expenses</p>
+              <p>...</p>
+              <p>Set savings targets</p>
+              <p>...</p>
+              <p>Access on all of your devices</p>
+              <p>...</p>
+              {/* <p>Get bill alerts</p>
+              <p>...</p>
+              <p>Import bank statement</p>
+              <p>...</p> */}
+              <p>Fast, simple, and responsive</p>
+            </Col>
+            <Col className="diagram" sm>
+              <CanvasJSChart options={options} />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="signup-button">
+              {authToken == null ? (
+                <Link to="/signup">
+                  <Button variant="primary" size="lg">
+                    Sign Up Now!
+                  </Button>
+                </Link>
+              ) : null}
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
