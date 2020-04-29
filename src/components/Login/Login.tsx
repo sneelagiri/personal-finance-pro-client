@@ -57,7 +57,7 @@ export default function Login({}: Props): ReactElement {
       <h1>Login</h1>
       <div>
         <Form
-          className="form"
+          className="login-form"
           onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             const authUser = await login({

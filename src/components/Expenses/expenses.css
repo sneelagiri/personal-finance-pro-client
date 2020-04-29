@@ -5,7 +5,7 @@ select {
 }
 
 @media screen and (max-width: 600px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 16rem;
     margin-left: auto;
     margin-right: auto;
@@ -16,12 +16,15 @@ select {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 8rem;
+  }
+  .no-expenses {
+    padding-bottom: 8rem;
   }
 }
 
 @media screen and (max-width: 900px) and (min-width: 600px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 16rem;
     margin-left: auto;
     margin-right: auto;
@@ -32,29 +35,37 @@ select {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 6.25rem;
+    margin-bottom: 20rem;
+  }
+
+  .no-expenses {
+    padding-bottom: 20rem;
   }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 900px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 16rem;
     margin-left: auto;
     margin-right: auto;
     padding-top: 4.5rem;
-    padding-bottom: 10rem;
+    padding-bottom: 2rem;
   }
 
   .expenses-table.expenses-table.expenses-table {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15rem;
+    margin-bottom: 37rem;
+  }
+
+  .no-expenses {
+    padding-bottom: 37rem;
   }
 }
 
 @media screen and (max-width: 1800px) and (min-width: 1200px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 16rem;
     margin-left: auto;
     margin-right: auto;
@@ -65,12 +76,16 @@ select {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 3rem;
+    margin-bottom: 30rem;
+  }
+
+  .no-expenses {
+    padding-bottom: 30rem;
   }
 }
 
 @media screen and (max-width: 2400px) and (min-width: 1800px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
@@ -82,12 +97,16 @@ select {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 6.25rem;
+    margin-bottom: 50rem;
+  }
+
+  .no-expenses {
+    padding-bottom: 50rem;
   }
 }
 
 @media screen and (max-width: 3600px) and (min-width: 2400px) {
-  .form.form.form {
+  .expenses-form.expenses-form.expenses-form {
     width: 16rem;
     margin-left: auto;
     margin-right: auto;
@@ -99,6 +118,10 @@ select {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15rem;
+    margin-bottom: 70rem;
+  }
+
+  .no-expenses {
+    padding-bottom: 70rem;
   }
 }

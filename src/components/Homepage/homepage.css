@@ -63,6 +63,30 @@ p {
   .signup-button {
     padding-top: 50px;
   }
+  .homepage {
+    padding-top: 14.5rem;
+    padding-bottom: 14.5rem;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 900px) {
+  .signup-button {
+    padding-top: 50px;
+  }
+  .homepage {
+    padding-top: 14.5rem;
+    padding-bottom: 14.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .signup-button {
+    padding-top: 50px;
+  }
+  .homepage {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
 }
 
 @media screen and (max-width: 600px) {

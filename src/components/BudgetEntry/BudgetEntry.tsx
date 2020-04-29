@@ -41,7 +41,7 @@ export default function BudgetEntry({}: Props): ReactElement {
     <div>
       <h1>Start here!</h1>
       <Form
-        className="form"
+        className="budget-entry-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           const createdBudget = await postBudget({

@@ -39,7 +39,7 @@ export default function Signup({}: Props): ReactElement {
     <div className="signup">
       <h1>Signup</h1>
       <Form
-        className="form"
+        className="signup-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           const fetchToken = await signup({

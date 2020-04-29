@@ -3,9 +3,9 @@
     padding-top: 10rem;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 1rem;
+    padding-bottom: 15rem;
   }
-  .form.form.form {
+  .login-form.login-form.login-form {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -18,40 +18,52 @@
   }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 600px) {
+@media screen and (max-width: 900px) and (min-width: 600px) {
   .login {
-    width: 40rem;
+    width: 20rem;
     padding-top: 10rem;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 27rem;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 900px) {
+  .login {
+    width: 20rem;
+    padding-top: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50rem;
   }
 }
 
 @media screen and (max-width: 1800px) and (min-width: 1200px) {
   .login {
-    width: 60rem;
+    width: 20rem;
     padding-top: 10rem;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 15rem;
   }
 }
 
 @media screen and (max-width: 2400px) and (min-width: 1800px) {
   .login {
-    width: 60rem;
+    width: 20rem;
     padding-top: 10rem;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 1rem;
+    padding-bottom: 20rem;
   }
 }
 
 @media screen and (max-width: 3600px) and (min-width: 2400px) {
   .login {
-    width: 60rem;
+    width: 20rem;
     padding-top: 20rem;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 18rem;
+    padding-bottom: 85rem;
   }
 }

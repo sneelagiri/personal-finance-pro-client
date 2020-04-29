@@ -29,7 +29,7 @@ export default function Expenses({}: Props): ReactElement {
     <div className="expenses">
       <h1>Add an expense</h1>
       <Form
-        className="form"
+        className="expenses-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           console.log(expenseAmount, expenseDesc, expenseCategory, expenseDate);
@@ -148,7 +148,7 @@ export default function Expenses({}: Props): ReactElement {
           </tbody>
         </Table>
       ) : (
-        <h2>No expenses found</h2>
+        <h2 className="no-expenses">No expenses found</h2>
       )}
     </div>
   );
