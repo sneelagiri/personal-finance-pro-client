@@ -45,75 +45,78 @@ class Header extends Component<Props, State> {
     }
     return (
       <div className="header">
-        <Navbar bg="blue" variant="dark">
-          <Navbar.Brand as={Link} to="/">
-            <Image src={logo} roundedCircle className="brandImage" />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto linkColor">
-              {authToken == null && (
-                <>
-                  <Nav.Link as={Link} to="/" className="linkColor">
-                    Home
-                  </Nav.Link>
+        <header>
+          <Navbar bg="blue" variant="dark" expand="md">
+            <Navbar.Brand as={Link} to="/">
+              <Image src={logo} roundedCircle className="brandImage" />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto linkColor">
+                {authToken == null && (
+                  <>
+                    <Nav.Link as={Link} to="/" className="linkColor">
+                      Home
+                    </Nav.Link>
 
-                  <Nav.Link as={Link} to="/signup">
-                    Signup
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/login">
-                    Login
-                  </Nav.Link>
-                </>
-              )}
-              {authToken &&
-              typeof latestBudget === "string" &&
-              typeof overviewBudget === "string" ? (
-                <Nav.Link as={Link} to="/your-finances">
-                  Your Finances
-                </Nav.Link>
-              ) : (authToken && typeof overviewBudget === "object") ||
-                typeof latestBudget === "object" ? (
-                <>
-                  <Nav.Link as={Link} to="/overview">
-                    Overview
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/expenses">
-                    Expenses
-                  </Nav.Link>
-                </>
-              ) : null}
-            </Nav>
-            {authToken && (
-              <Nav>
-                {typeof userData === "object" && (
-                  <Navbar.Text className="headerText">
-                    Signed in as: {`${userData.firstName} ${userData.lastName}`}
-                  </Navbar.Text>
+                    <Nav.Link as={Link} to="/signup">
+                      Signup
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/login">
+                      Login
+                    </Nav.Link>
+                  </>
                 )}
-
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    localStorage.removeItem(AUTH_TOKEN);
-                    localStorage.removeItem(CURRENT_BUDGET);
-                    localStorage.removeItem(LATEST_BUDGET);
-                    localStorage.removeItem(USER_DATA);
-                    this.props.history.push(`/`);
-                  }}
-                  className="headerButton"
-                  variant="outline-light"
-                >
-                  Logout
-                </Button>
+                {authToken &&
+                typeof latestBudget === "string" &&
+                typeof overviewBudget === "string" ? (
+                  <Nav.Link as={Link} to="/your-finances">
+                    Your Finances
+                  </Nav.Link>
+                ) : (authToken && typeof overviewBudget === "object") ||
+                  typeof latestBudget === "object" ? (
+                  <>
+                    <Nav.Link as={Link} to="/overview">
+                      Overview
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/expenses">
+                      Expenses
+                    </Nav.Link>
+                  </>
+                ) : null}
               </Nav>
-            )}
-            {/* <Form inline>
+              {authToken && (
+                <Nav>
+                  {typeof userData === "object" && (
+                    <Navbar.Text className="headerText">
+                      Signed in as:{" "}
+                      {`${userData.firstName} ${userData.lastName}`}
+                    </Navbar.Text>
+                  )}
+
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      localStorage.removeItem(AUTH_TOKEN);
+                      localStorage.removeItem(CURRENT_BUDGET);
+                      localStorage.removeItem(LATEST_BUDGET);
+                      localStorage.removeItem(USER_DATA);
+                      this.props.history.push(`/`);
+                    }}
+                    className="headerButton"
+                    variant="outline-light"
+                  >
+                    Logout
+                  </Button>
+                </Nav>
+              )}
+              {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
           </Form> */}
-          </Navbar.Collapse>
-        </Navbar>
+            </Navbar.Collapse>
+          </Navbar>
+        </header>
       </div>
     );
   }

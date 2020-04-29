@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { AUTH_TOKEN, USER_DATA } from "../../constants";
-
+import "./signup.css";
 interface Props {}
 
 interface Response {
@@ -33,13 +33,13 @@ export default function Signup({}: Props): ReactElement {
     const { token, user } = data.signup;
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER_DATA, JSON.stringify(user));
-    history.push("/");
+    history.push("/your-finances");
   };
   return (
-    <div>
+    <div className="signup">
       <h1>Signup</h1>
       <Form
-        className="form"
+        className="signup-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           const fetchToken = await signup({
@@ -115,6 +115,7 @@ export default function Signup({}: Props): ReactElement {
             name="password"
             value={password}
             placeholder="Enter a safe password"
+            autoComplete="new-password"
             required
           />
         </Form.Group>

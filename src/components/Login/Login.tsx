@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LOGIN_MUTATION } from "../../mutations/mutations";
 import { AUTH_TOKEN, LATEST_BUDGET, USER_DATA } from "../../constants";
-
+import "./login.css";
 interface Props {}
 
 interface Response {
@@ -53,11 +53,11 @@ export default function Login({}: Props): ReactElement {
   };
 
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
       <div>
         <Form
-          className="form"
+          className="login-form"
           onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             const authUser = await login({
@@ -79,6 +79,7 @@ export default function Login({}: Props): ReactElement {
               name="email"
               placeholder="Your email address"
               value={email}
+              className="field"
             />
           </Form.Group>
           <Form.Group controlId="formPassword">
@@ -91,6 +92,7 @@ export default function Login({}: Props): ReactElement {
               name="password"
               placeholder="Your password"
               value={password}
+              className="field"
             />
           </Form.Group>
           <Button variant="primary" type="submit">

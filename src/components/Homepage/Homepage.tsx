@@ -18,7 +18,7 @@ export default class Homepage extends Component<Props> {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN);
     return (
-      <div>
+      <div className="homepage">
         <Container fluid>
           <Row className="title">
             <Col>
@@ -26,7 +26,7 @@ export default class Homepage extends Component<Props> {
             </Col>
           </Row>
           <Row className="body">
-            <Col className="featureList" sm>
+            <Col className="featureList">
               <h2>Features</h2>
               <p>Get informative visuals</p>
               <p>...</p>
@@ -47,7 +47,7 @@ export default class Homepage extends Component<Props> {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="signup-button">
               {authToken == null ? (
                 <Link to="/signup">
                   <Button variant="primary" size="lg">

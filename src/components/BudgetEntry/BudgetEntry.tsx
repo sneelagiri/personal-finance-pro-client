@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import moment from "moment";
 import { BUDGET_ENTRY_MUTATION } from "../../mutations/mutations";
 import { CURRENT_BUDGET } from "../../constants";
-
+import "./budget-entry.css";
 interface Props {}
 
 interface PostBudget {
@@ -41,7 +41,7 @@ export default function BudgetEntry({}: Props): ReactElement {
     <div>
       <h1>Start here!</h1>
       <Form
-        className="form"
+        className="budget-entry-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           const createdBudget = await postBudget({

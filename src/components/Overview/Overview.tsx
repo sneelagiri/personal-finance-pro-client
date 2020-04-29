@@ -11,7 +11,8 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function Overview({}: Props): ReactElement {
-  const { loading, error, data } = useQuery(BUDGET_QUERY);
+  const { loading, error, data, refetch } = useQuery(BUDGET_QUERY);
+  refetch();
   if (data) {
     console.log(data);
     const {
@@ -59,7 +60,7 @@ export default function Overview({}: Props): ReactElement {
       ],
     };
     return (
-      <div>
+      <div className="overview">
         <h1 className="overview-header">Overview</h1>
         <h1 className="budget-header">Budget - Total: €{total}</h1>
         <CanvasJSChart options={options} />
