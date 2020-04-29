@@ -122,7 +122,7 @@ export default function Expenses({}: Props): ReactElement {
       ) : error ? (
         <p>Error fetching expenses: {error}</p>
       ) : data.currentExpenses.length > 0 ? (
-        <Table className="expenses-table">
+        <Table className="expenses-table" responsive>
           <thead>
             <tr>
               <th>#</th>
