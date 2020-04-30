@@ -63,6 +63,8 @@ export default function Signup({}: Props): ReactElement {
             }
             type="text"
             name="firstName"
+            pattern="^[^<>#$%]*"
+            title="Please don't use invalid characters such as < or $"
             placeholder="Your first name"
             value={firstName}
             required
@@ -79,6 +81,8 @@ export default function Signup({}: Props): ReactElement {
             type="text"
             name="lastName"
             placeholder="Your last name"
+            pattern="^[^<>#$%]*"
+            title="Please don't use invalid characters such as < or $"
             value={lastName}
             required
           />
@@ -115,6 +119,8 @@ export default function Signup({}: Props): ReactElement {
             name="password"
             value={password}
             placeholder="Enter a safe password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
             autoComplete="new-password"
             required
           />
