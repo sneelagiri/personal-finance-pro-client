@@ -31,7 +31,10 @@ interface BudgetData {
 export default function Login({}: Props): ReactElement {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login] = useMutation(LOGIN_MUTATION);
+  const [valid, setValid] = useState(false);
+  const [login, { error }] = useMutation(LOGIN_MUTATION, {
+    errorPolicy: "ignore",
+  });
   const history = useHistory();
 
   const _confirm = async (data: Response) => {
@@ -43,7 +46,7 @@ export default function Login({}: Props): ReactElement {
       history.push(`/your-finances`);
     }
   };
-
+  console.log(error?.graphQLErrors);
   const _saveUserData = (token: string, user: object, latestBudget: object) => {
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER_DATA, JSON.stringify(user));
@@ -51,10 +54,12 @@ export default function Login({}: Props): ReactElement {
       localStorage.setItem(LATEST_BUDGET, JSON.stringify(latestBudget));
     }
   };
+  const errorMessage = error ? error.graphQLErrors[0].message : null;
 
   return (
     <div className="login">
       <h1>Login</h1>
+      {errorMessage ? <h2 className="invalid">{errorMessage}</h2> : null}
       <div>
         <Form
           className="login-form"
@@ -65,8 +70,10 @@ export default function Login({}: Props): ReactElement {
                 email: email,
                 password: password,
               },
-            });
-            _confirm(authUser.data);
+            }).catch((error) => setValid(false));
+            if (authUser) {
+              _confirm(authUser.data);
+            }
           }}
         >
           <Form.Group controlId="formEmail">

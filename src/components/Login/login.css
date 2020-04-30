@@ -67,3 +67,8 @@
     padding-bottom: 85rem;
   }
 }
+
+.invalid {
+  color: red;
+  font-weight: bold;
+}
