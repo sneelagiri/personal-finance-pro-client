@@ -1,9 +1,11 @@
 import React, { ReactElement, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { SIGNUP_MUTATION } from "../../mutations/mutations";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { onError } from "apollo-link-error";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { SIGNUP_MUTATION } from "../../mutations/mutations";
+import { USER_EXISTS_QUERY } from "../../queries/queries";
 import { AUTH_TOKEN, USER_DATA } from "../../constants";
 import "./signup.css";
 interface Props {}
@@ -27,7 +29,11 @@ export default function Signup({}: Props): ReactElement {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signup] = useMutation(SIGNUP_MUTATION);
+  const [signup, error] = useMutation(SIGNUP_MUTATION);
+  const { data, refetch } = useQuery(USER_EXISTS_QUERY, {
+    variables: { email },
+    errorPolicy: "ignore",
+  });
   const history = useHistory();
   const _storeToken = (data: Response) => {
     const { token, user } = data.signup;
@@ -35,6 +41,7 @@ export default function Signup({}: Props): ReactElement {
     localStorage.setItem(USER_DATA, JSON.stringify(user));
     history.push("/your-finances");
   };
+
   return (
     <div className="signup">
       <h1>Signup</h1>
@@ -63,6 +70,8 @@ export default function Signup({}: Props): ReactElement {
             }
             type="text"
             name="firstName"
+            pattern="^[^<>#$%]*"
+            title="Please don't use invalid characters such as < or $"
             placeholder="Your first name"
             value={firstName}
             required
@@ -79,6 +88,8 @@ export default function Signup({}: Props): ReactElement {
             type="text"
             name="lastName"
             placeholder="Your last name"
+            pattern="^[^<>#$%]*"
+            title="Please don't use invalid characters such as < or $"
             value={lastName}
             required
           />
@@ -89,18 +100,26 @@ export default function Signup({}: Props): ReactElement {
             <b>Email address:</b>
           </Form.Label>
           <Form.Control
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
+            onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
+              refetch();
+              setEmail(e.target.value);
+            }}
             type="email"
             name="email"
             value={email}
             placeholder="Your email"
             required
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+          {data ? (
+            <Form.Text className="red">
+              This email address is in use. Please use a different email
+              address.
+            </Form.Text>
+          ) : (
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Form.Group controlId="formPassword">
@@ -115,13 +134,21 @@ export default function Signup({}: Props): ReactElement {
             name="password"
             value={password}
             placeholder="Enter a safe password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
             autoComplete="new-password"
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Signup
-        </Button>
+        {data ? (
+          <Button variant="primary" type="submit" disabled>
+            Signup
+          </Button>
+        ) : (
+          <Button variant="primary" type="submit">
+            Signup
+          </Button>
+        )}
       </Form>
     </div>
   );

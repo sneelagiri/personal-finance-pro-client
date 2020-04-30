@@ -14,7 +14,6 @@ export default function Overview({}: Props): ReactElement {
   const { loading, error, data, refetch } = useQuery(BUDGET_QUERY);
   refetch();
   if (data) {
-    console.log(data);
     const {
       startDate,
       endDate,

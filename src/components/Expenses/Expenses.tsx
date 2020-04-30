@@ -32,7 +32,6 @@ export default function Expenses({}: Props): ReactElement {
         className="expenses-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
-          console.log(expenseAmount, expenseDesc, expenseCategory, expenseDate);
           const createdExpense = await postExpense({
             variables: {
               expenseAmount: parseFloat(expenseAmount),
