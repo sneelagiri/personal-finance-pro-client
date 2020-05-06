@@ -31,7 +31,6 @@ interface BudgetData {
 export default function Login({}: Props): ReactElement {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [valid, setValid] = useState(false);
   const [login, { error }] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "ignore",
   });
@@ -46,7 +45,6 @@ export default function Login({}: Props): ReactElement {
       history.push(`/your-finances`);
     }
   };
-  console.log(error?.graphQLErrors);
   const _saveUserData = (token: string, user: object, latestBudget: object) => {
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER_DATA, JSON.stringify(user));
@@ -70,7 +68,7 @@ export default function Login({}: Props): ReactElement {
                 email: email,
                 password: password,
               },
-            }).catch((error) => setValid(false));
+            }).catch((error) => null);
             if (authUser) {
               _confirm(authUser.data);
             }
