@@ -23,11 +23,22 @@ export default function Expenses({}: Props): ReactElement {
     refetch: refetchB,
   } = useQuery(BUDGET_QUERY);
   const { loading, data, error, refetch } = useQuery(EXPENSES_QUERY);
+  refetch();
   let counter = 0;
-
+  const remainingAmount =
+    dataB?.currentBudget.total - dataB?.currentBudget.totalExpenses;
+  const currentExpense = parseFloat(expenseAmount) | 0;
+  const newTotal = remainingAmount - currentExpense;
+  const isAmountPositive = newTotal >= 0 ? true : false;
   return (
     <div className="expenses">
       <h1>Add an expense</h1>
+      {!isAmountPositive ? (
+        <div className="red">
+          Your latest expense exceeds your remaining budget. Please increase
+          your budget before adding the expense.
+        </div>
+      ) : null}
       <Form
         className="expenses-form"
         onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,6 +52,7 @@ export default function Expenses({}: Props): ReactElement {
               budgetId: dataB.currentBudget.id,
             },
           });
+          refetch();
           refetch();
         }}
       >
@@ -112,9 +124,15 @@ export default function Expenses({}: Props): ReactElement {
             placeholder="e.g. Spent after work on Friday"
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Save
-        </Button>
+        {isAmountPositive ? (
+          <Button variant="primary" type="submit">
+            Save
+          </Button>
+        ) : (
+          <Button variant="primary" type="submit" disabled>
+            Save
+          </Button>
+        )}
       </Form>
       {loading ? (
         <h2>Loading expenses</h2>
