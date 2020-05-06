@@ -9,6 +9,7 @@ import BudgetEntry from "./components/BudgetEntry/BudgetEntry";
 import Overview from "./components/Overview/Overview";
 import Expenses from "./components/Expenses/Expenses";
 import Savings from "./components/Savings/Savings";
+import NewBudget from "./components/NewBudget/NewBudget";
 
 export default function App(): ReactElement {
   return (
@@ -20,6 +21,7 @@ export default function App(): ReactElement {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/your-finances" component={BudgetEntry} />
         <Route exact path="/overview" component={Overview} />
+        <Route exact path="/overview/:month" component={NewBudget} />
         <Route exact path="/expenses" component={Expenses} />
         <Route exact path="/savings" component={Savings} />
       </Switch>
