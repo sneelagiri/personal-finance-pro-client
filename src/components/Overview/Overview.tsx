@@ -1,8 +1,11 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, ChangeEvent } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
+
 import CanvasJSReact from "../../assets/canvasjs.react";
 import { BUDGET_QUERY, EXPENSES_QUERY } from "../../queries/queries";
+
 import "./overview.css";
 
 interface Props {}
@@ -24,7 +27,12 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function Overview({}: Props): ReactElement {
+  const currentMonth = moment().format("MMMM");
+  const currentYear = moment().format("YYYY");
   const [finalRemainingAmount, setFinalRemainingAmount] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState(currentMonth);
+  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const history = useHistory();
   let finalSavings = 0;
   const { loading, error, data, refetch } = useQuery(BUDGET_QUERY);
   const {
@@ -232,10 +240,79 @@ export default function Overview({}: Props): ReactElement {
         },
       ],
     };
-
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const years = [
+      moment().subtract("1", "years").format("YYYY"),
+      moment().format("YYYY"),
+      moment().add("1", "years").format("YYYY"),
+    ];
+    console.log(selectedMonth);
     return (
       <div className="overview">
         <h1 className="overview-header">Overview</h1>
+        <div className="month-select">
+          <form>
+            <select
+              defaultValue={selectedMonth}
+              onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                setSelectedMonth(event.target.value);
+              }}
+            >
+              {months.map((month) => {
+                if (month === moment().format("MMMM")) {
+                  return (
+                    <option key={month} value={month}>
+                      {month}
+                    </option>
+                  );
+                }
+                return (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              defaultValue={years[1]}
+              onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                setSelectedYear(event.target.value);
+              }}
+            >
+              <option key={years[0]} value={years[0]}>
+                {years[0]}
+              </option>
+              <option key={years[1]} value={years[1]} selected>
+                {years[1]}
+              </option>
+              <option key={years[2]} value={years[2]}>
+                {years[2]}
+              </option>
+            </select>
+            <button
+              onClick={() => {
+                history.push(
+                  `/overview/${selectedYear}/${selectedMonth.toLowerCase()}`
+                );
+              }}
+            >
+              Go
+            </button>
+          </form>
+        </div>
         <h1 className="budget-header">
           Budget - Remaining Amount: €{finalRemainingAmount}
         </h1>
