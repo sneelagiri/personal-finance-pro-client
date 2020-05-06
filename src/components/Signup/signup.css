@@ -61,4 +61,6 @@
 .red {
   color: red;
   font-weight: bold;
+  padding-bottom: 1rem;
+  padding-top: 0.5rem;
 }
