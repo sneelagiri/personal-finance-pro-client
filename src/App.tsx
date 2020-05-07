@@ -21,7 +21,7 @@ export default function App(): ReactElement {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/your-finances" component={BudgetEntry} />
         <Route exact path="/overview" component={Overview} />
-        <Route exact path="/overview/:month" component={NewBudget} />
+        <Route exact path="/overview/:year/:month" component={NewBudget} />
         <Route exact path="/expenses" component={Expenses} />
         <Route exact path="/savings" component={Savings} />
       </Switch>
