@@ -21,6 +21,7 @@ interface LoginData {
 interface UserData {
   firstName: string;
   lastName: string;
+  id: string;
 }
 
 interface BudgetData {
@@ -38,6 +39,7 @@ export default function Login({}: Props): ReactElement {
 
   const _confirm = async (data: Response) => {
     const { token, user, latestBudget } = data.login;
+    console.log(user);
     _saveUserData(token, user, latestBudget);
     if (latestBudget) {
       history.push(`/overview`);

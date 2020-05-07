@@ -15,6 +15,7 @@ const SIGNUP_MUTATION = gql`
     ) {
       token
       user {
+        id
         firstName
         lastName
       }
@@ -27,6 +28,7 @@ const LOGIN_MUTATION = gql`
     login(email: $email, password: $password) {
       token
       user {
+        id
         firstName
         lastName
       }

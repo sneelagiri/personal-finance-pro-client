@@ -22,6 +22,7 @@ interface Token {
 interface UserData {
   firstName: string;
   lastName: string;
+  id: string;
 }
 
 export default function Signup({}: Props): ReactElement {
