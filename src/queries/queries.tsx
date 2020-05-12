@@ -15,9 +15,6 @@ const BUDGETS_QUERY = gql`
         postedBy {
           id
         }
-        expenses {
-          expenseAmount
-        }
       }
     }
   }
