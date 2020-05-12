@@ -29,11 +29,11 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export default function Overview({}: Props): ReactElement {
   const currentMonth = moment().format("MMMM");
   const currentYear = moment().format("YYYY");
-  const [finalRemainingAmount, setFinalRemainingAmount] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const history = useHistory();
   let finalSavings = 0;
+  let finalRemainingAmount = 0;
   const { loading, error, data, refetch } = useQuery(BUDGET_QUERY);
   const {
     loading: loadingExpenses,
@@ -209,8 +209,8 @@ export default function Overview({}: Props): ReactElement {
           y: isBudgetNegative,
           label: "Remaining Amount",
         };
-        setFinalRemainingAmount(isBudgetNegative);
         finalSavings = savingsAmount;
+        finalRemainingAmount = isBudgetNegative;
         dataPoints = [...dataPoints, newEntry, remainingAmount];
       }
     };
